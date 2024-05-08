@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.system.Controller.PolicyHolderController">
+    <children>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+            <children>
+                <BorderPane layoutX="8.0" prefHeight="700.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <left>
+                        <AnchorPane prefHeight="700.0" prefWidth="250.0" style="-fx-background-color: #0090FE;" BorderPane.alignment="CENTER">
+                            <children>
+                                <Text fill="WHITE" layoutX="68.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome">
+                                    <font>
+                                        <Font name="Arial" size="25.0" />
+                                    </font>
+                                </Text>
+                                <Text fill="WHITE" layoutX="78.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MinT">
+                                    <font>
+                                        <Font name="Arial Bold" size="36.0" />
+                                    </font>
+                                </Text>
+                                <Circle fill="WHITE" layoutX="120.0" layoutY="98.0" radius="63.0" stroke="WHITE" strokeType="INSIDE" AnchorPane.topAnchor="35.0" />
+                                <FontAwesomeIconView fill="#170808" glyphName="USER" layoutX="84.0" layoutY="137.0" size="100" text="" />
+                                <AnchorPane layoutY="270.0" prefHeight="70.0" prefWidth="250.0" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                                    <children>
+                                        <FontAwesomeIconView fill="WHITE" glyphName="HOME" layoutX="14.0" layoutY="45.0" size="30" styleClass="option_box">
+                                            <font>
+                                                <Font size="1.0" />
+                                            </font>
+                                        </FontAwesomeIconView>
+                                        <Text fill="WHITE" layoutX="98.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="option_box" text="HOME">
+                                            <font>
+                                                <Font name="Arial Bold Italic" size="18.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane layoutY="340.0" prefHeight="70.0" prefWidth="250.0" style="-fx-background-color: white;" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                                    <children>
+                                        <FontAwesomeIconView glyphName="USERS" layoutX="14.0" layoutY="45.0" size="30" styleClass="option_box" />
+                                        <Text layoutX="79.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="option_box" text="MEMBERS">
+                                            <font>
+                                                <Font name="Arial Bold Italic" size="18.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane layoutY="410.0" prefHeight="70.0" prefWidth="250.0" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                                    <children>
+                                        <FontAwesomeIconView fill="WHITE" glyphName="FILE" layoutX="14.0" layoutY="45.0" size="30" styleClass="option_box" />
+                                        <Text fill="WHITE" layoutX="91.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="option_box" text="CLAIMS">
+                                            <font>
+                                                <Font name="Arial Bold Italic" size="18.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane layoutY="626.0" prefHeight="50.0" prefWidth="250.0" styleClass="logout_box" stylesheets="@../../Styles/policyHolderDashBoard.css" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="0.0">
+                                    <children>
+                                        <Button layoutX="8.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="58.0" styleClass="logout_button" stylesheets="@../../Styles/policyHolderDashBoard.css" textFill="#eeeeee" />
+                                        <FontAwesomeIconView fill="WHITE" glyphName="SIGN_OUT" layoutX="23.0" layoutY="35.0" size="30" />
+                                        <Label layoutX="77.0" layoutY="15.0" text="Logout" textFill="WHITE">
+                                            <font>
+                                                <Font name="Arial Bold Italic" size="17.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </AnchorPane>
+                    </left>
+                    <center>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                            <children>
+                                <Label layoutX="14.0" layoutY="14.0" text="Members Details">
+                                    <font>
+                                        <Font name="Arial Bold" size="34.0" />
+                                    </font>
+                                </Label>
+                                <AnchorPane layoutX="17.0" layoutY="254.0" prefHeight="420.0" prefWidth="917.0" style="-fx-background-color: white; -fx-background-radius: 20px;" styleClass="shadow" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                                    <children>
+                                        <Label layoutX="22.0" layoutY="18.0" text="Customer Information" textFill="#0090fe">
+                                            <font>
+                                                <Font name="Arial Bold" size="36.0" />
+                                            </font>
+                                        </Label>
+                                        <AnchorPane layoutX="22.0" layoutY="146.0" prefHeight="40.0" prefWidth="879.0" style="-fx-background-color: white; -fx-background-radius: 10px;" styleClass="shadow" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                                            <children>
+                                                <Label layoutX="14.0" layoutY="4.0" text="Full Name :" textFill="#0090fe">
+                                                    <font>
+                                                        <Font name="Arial Italic" size="28.0" />
+                                                    </font>
+                                                </Label>
+                                                <Text layoutX="170.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TRAN NGOC MINH">
+                                                    <font>
+                                                        <Font name="System Bold" size="24.0" />
+                                                    </font>
+                                                </Text>
+                                            </children>
+                                        </AnchorPane>
+                                        <AnchorPane layoutX="22.0" layoutY="82.0" prefHeight="40.0" prefWidth="879.0" style="-fx-background-color: white; -fx-background-radius: 10px;" styleClass="shadow" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                                            <children>
+                                                <Label layoutX="14.0" layoutY="4.0" text="Username :" textFill="#0090fe">
+                                                    <font>
+                                                        <Font name="Arial Italic" size="28.0" />
+                                                    </font>
+                                                </Label>
+                                                <Text layoutX="168.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mintdunno">
+                                                    <font>
+                                                        <Font name="System Bold" size="24.0" />
+                                                    </font>
+                                                </Text>
+                                            </children>
+                                        </AnchorPane>
+                                        <AnchorPane layoutX="19.0" layoutY="210.0" prefHeight="40.0" prefWidth="879.0" style="-fx-background-color: white; -fx-background-radius: 10px;" styleClass="shadow" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                                            <children>
+                                                <Label layoutX="14.0" layoutY="4.0" text="Email Address :" textFill="#0090fe">
+                                                    <font>
+                                                        <Font name="Arial Italic" size="28.0" />
+                                                    </font>
+                                                </Label>
+                                                <Text layoutX="220.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="s3911737@rmit.edu.vn">
+                                                    <font>
+                                                        <Font name="System Bold" size="24.0" />
+                                                    </font>
+                                                </Text>
+                                            </children>
+                                        </AnchorPane>
+                                        <AnchorPane layoutX="19.0" layoutY="280.0" prefHeight="40.0" prefWidth="879.0" style="-fx-background-color: white; -fx-background-radius: 10px;" styleClass="shadow" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                                            <children>
+                                                <Label layoutX="14.0" layoutY="4.0" text="Phone :" textFill="#0090fe">
+                                                    <font>
+                                                        <Font name="Arial Italic" size="28.0" />
+                                                    </font>
+                                                </Label>
+                                                <Text layoutX="121.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0901234567">
+                                                    <font>
+                                                        <Font name="System Bold" size="24.0" />
+                                                    </font>
+                                                </Text>
+                                            </children>
+                                        </AnchorPane>
+                                        <Button layoutX="389.0" layoutY="342.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="157.0" style="-fx-background-radius: 20px;" text=" EDIT" textFill="WHITE">
+                                            <font>
+                                                <Font name="System Bold" size="27.0" />
+                                            </font>
+                                            <graphic>
+                                                <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="30" text="" />
+                                            </graphic>
+                                            <styleClass>
+                                                <String fx:value="logout_button" />
+                                                <String fx:value="edit_button" />
+                                            </styleClass>
+                                        </Button>
+                                    </children>
+                                </AnchorPane>
+                                <Line endX="799.0" layoutX="125.0" layoutY="53.0" startX="-110.0" />
+                        <TextField layoutX="17.0" layoutY="65.0" prefHeight="33.0" prefWidth="438.0" promptText="Search..." style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 10px;">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </TextField>
+                        <FontAwesomeIconView glyphName="SEARCH" layoutX="424.0" layoutY="90.0" size="25" text="" />
+                        <FontAwesomeIconView fill="#0090fe" glyphName="USER_PLUS" layoutX="829.0" layoutY="95.0" size="40" />
+                        <FontAwesomeIconView fill="GREEN" glyphName="REFRESH" layoutX="890.0" layoutY="95.0" size="40" />
+                            </children>
+                        </AnchorPane>
+                    </center>
+                </BorderPane>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>
