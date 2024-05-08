@@ -1,0 +1,35 @@
+.option_box {
+    -fx-background-color: transparent;
+}
+
+.option_box:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #94FFD8;
+    -fx-color: black;
+}
+
+.logout_button {
+    -fx-cursor: hand;
+    -fx-border: solid 2px black;
+    -fx-background-radius: 20px;
+    -fx-background-color: #074173;
+}
+
+.logout_button:hover {
+    -fx-background-color: red;
+}
+
+.edit_button {
+    -fx-cursor: hand;
+    -fx-border: solid 2px black;
+    -fx-background-radius: 15px;
+    -fx-background-color: #0090FE;
+}
+.edit_button:hover {
+    -fx-background-color: green;
+}
+
+
+.shadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+}
