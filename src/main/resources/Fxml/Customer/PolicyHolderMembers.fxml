@@ -92,10 +92,11 @@
                                 </Label>
                                 <AnchorPane layoutX="17.0" layoutY="120.0" prefHeight="554.0" prefWidth="917.0" style="-fx-background-color: white; -fx-background-radius: 20px;" styleClass="shadow" stylesheets="@../../Styles/policyHolderDashBoard.css" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="120.0">
                            <children>
-                              <TableView layoutX="22.0" layoutY="20.0" prefHeight="200.0" prefWidth="200.0">
+                              <TableView layoutX="22.0" layoutY="20.0" prefHeight="554.0" prefWidth="917.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
                                   <TableColumn prefWidth="75.0" text="C1" />
                                   <TableColumn prefWidth="75.0" text="C2" />
+                                    <TableColumn prefWidth="75.0" text="C2" />
                                 </columns>
                               </TableView>
                            </children>

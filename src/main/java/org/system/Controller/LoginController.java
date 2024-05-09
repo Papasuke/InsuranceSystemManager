@@ -29,12 +29,8 @@ public class LoginController implements Initializable {
     @FXML
     private TextField username_input;
     @FXML
-    protected void close(){
-        close_button.setOnMouseClicked((MouseEvent event) -> {
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-            stage.close();
-        });
+    private void onCloseClicked(MouseEvent event){
+        javafx.application.Platform.exit();
     }
 
     @Override
