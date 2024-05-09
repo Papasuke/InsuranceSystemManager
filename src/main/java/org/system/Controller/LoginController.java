@@ -1,4 +1,44 @@
 package org.system.Controller;
 
-public class LoginController {
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.scene.Node;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class LoginController implements Initializable {
+    @FXML
+    private FontAwesomeIconView close_button;
+
+    @FXML
+    private Button login_button;
+
+    @FXML
+    private PasswordField password_input;
+
+    @FXML
+    private TextField username_input;
+    @FXML
+    protected void close(){
+        close_button.setOnMouseClicked((MouseEvent event) -> {
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+            stage.close();
+        });
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
 }

@@ -12,7 +12,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.system.Controller.PolicyHolderController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -89,7 +88,7 @@
                               <Font name="Arial Bold" size="34.0" />
                            </font>
                         </Label>
-                        <AnchorPane layoutX="32.0" layoutY="81.0" prefHeight="130.0" prefWidth="270.0" style="-fx-background-color: white; -fx-background-radius: 20px;" styleClass="shadow" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                        <AnchorPane layoutX="32.0" layoutY="81.0" prefHeight="130.0" prefWidth="270.0" style="-fx-background-color: white; -fx-background-radius: 20px;" styleClass="shadow" stylesheets="@../../Styles/policyHolderDashBoard.css" AnchorPane.leftAnchor="32.0">
                            <children>
                               <Label layoutX="14.0" layoutY="11.0" text="Claims">
                                  <font>
@@ -139,14 +138,14 @@
                               </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="17.0" layoutY="254.0" prefHeight="420.0" prefWidth="917.0" style="-fx-background-color: white; -fx-background-radius: 20px;" styleClass="shadow" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                        <AnchorPane layoutX="17.0" layoutY="254.0" prefHeight="420.0" prefWidth="917.0" style="-fx-background-color: white; -fx-background-radius: 20px;" styleClass="shadow" stylesheets="@../../Styles/policyHolderDashBoard.css" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="254.0">
                            <children>
                               <Label layoutX="22.0" layoutY="18.0" text="Customer Information" textFill="#0090fe">
                                  <font>
                                     <Font name="Arial Bold" size="36.0" />
                                  </font>
                               </Label>
-                              <AnchorPane layoutX="22.0" layoutY="146.0" prefHeight="40.0" prefWidth="879.0" style="-fx-background-color: white; -fx-background-radius: 10px;" styleClass="shadow" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                              <AnchorPane layoutX="22.0" layoutY="146.0" prefHeight="40.0" prefWidth="879.0" style="-fx-background-color: white; -fx-background-radius: 10px;" styleClass="shadow" stylesheets="@../../Styles/policyHolderDashBoard.css" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="16.0">
                                  <children>
                                     <Label layoutX="14.0" layoutY="4.0" text="Full Name :" textFill="#0090fe">
                                        <font>
@@ -160,7 +159,7 @@
                                     </Text>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="22.0" layoutY="82.0" prefHeight="40.0" prefWidth="879.0" style="-fx-background-color: white; -fx-background-radius: 10px;" styleClass="shadow" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                              <AnchorPane layoutX="22.0" layoutY="82.0" prefHeight="40.0" prefWidth="879.0" style="-fx-background-color: white; -fx-background-radius: 10px;" styleClass="shadow" stylesheets="@../../Styles/policyHolderDashBoard.css" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="16.0">
                                  <children>
                                     <Label layoutX="14.0" layoutY="4.0" text="Username :" textFill="#0090fe">
                                        <font>
@@ -174,7 +173,7 @@
                                     </Text>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="19.0" layoutY="210.0" prefHeight="40.0" prefWidth="879.0" style="-fx-background-color: white; -fx-background-radius: 10px;" styleClass="shadow" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                              <AnchorPane layoutX="19.0" layoutY="210.0" prefHeight="40.0" prefWidth="879.0" style="-fx-background-color: white; -fx-background-radius: 10px;" styleClass="shadow" stylesheets="@../../Styles/policyHolderDashBoard.css" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="16.0">
                                  <children>
                                     <Label layoutX="14.0" layoutY="4.0" text="Email Address :" textFill="#0090fe">
                                        <font>
@@ -188,7 +187,7 @@
                                     </Text>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="19.0" layoutY="280.0" prefHeight="40.0" prefWidth="879.0" style="-fx-background-color: white; -fx-background-radius: 10px;" styleClass="shadow" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                              <AnchorPane layoutX="19.0" layoutY="280.0" prefHeight="40.0" prefWidth="879.0" style="-fx-background-color: white; -fx-background-radius: 10px;" styleClass="shadow" stylesheets="@../../Styles/policyHolderDashBoard.css" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="16.0">
                                  <children>
                                     <Label layoutX="14.0" layoutY="4.0" text="Phone :" textFill="#0090fe">
                                        <font>
@@ -202,7 +201,7 @@
                                     </Text>
                                  </children>
                               </AnchorPane>
-                              <Button layoutX="389.0" layoutY="342.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="157.0" style="-fx-background-radius: 20px;" text=" EDIT" textFill="WHITE">
+                              <Button layoutX="389.0" layoutY="342.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="157.0" style="-fx-background-radius: 20px;" text=" EDIT" textFill="WHITE" AnchorPane.leftAnchor="389.0" AnchorPane.rightAnchor="371.0" AnchorPane.topAnchor="342.0">
                                  <font>
                                     <Font name="System Bold" size="27.0" />
                                  </font>
@@ -216,7 +215,7 @@
                               </Button>
                            </children>
                         </AnchorPane>
-                        <Line endX="799.0" layoutX="133.0" layoutY="234.0" startX="-110.0" />
+                        <Line endX="799.0" layoutX="133.0" layoutY="234.0" startX="-110.0" AnchorPane.bottomAnchor="465.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="233.5" />
                      </children>
                   </AnchorPane>
                </center>
