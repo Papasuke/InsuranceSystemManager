@@ -1,0 +1,17 @@
+.login_containter {
+    -fx-background-color: white;
+}
+
+.loginButton {
+    -fx-background-color: #0090FE;
+}
+.closeButton {
+    -fx-cursor: hand;
+}
+.closeButton:hover {
+    -fx-color: red;
+}
+.loginButton:hover {
+    -fx-background-color: black;
+    -fx-cursor: hand;
+}
