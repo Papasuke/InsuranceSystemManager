@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="800.0" prefWidth="700.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.system.Controller.policyHolderClaimController">
+   <children>
+      <AnchorPane prefHeight="50.0" prefWidth="700.0" style="-fx-background-color: #61ACFF;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <FontAwesomeIconView fx:id="backButton" fill="WHITE" glyphName="CLOSE" layoutX="662.0" layoutY="35.0" size="30" AnchorPane.rightAnchor="14.428571701049805" />
+            <FontAwesomeIconView fill="WHITE" glyphName="FILE" layoutX="14.0" layoutY="35.0" size="30" wrappingWidth="11.285714149475098" />
+            <Text fill="WHITE" layoutX="53.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Upload Claim">
+               <font>
+                  <Font name="Arial" size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <Text layoutX="14.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insured Person:">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font>
+      </Text>
+      <TextField layoutX="13.0" layoutY="97.0" prefHeight="25.0" prefWidth="675.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0" />
+      <Text layoutX="14.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bank Name:">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font>
+      </Text>
+      <TextField layoutX="14.0" layoutY="172.0" prefHeight="25.0" prefWidth="675.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0" />
+      <Text layoutX="14.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Number:">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font>
+      </Text>
+      <TextField layoutX="14.0" layoutY="247.0" prefHeight="25.0" prefWidth="675.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0" />
+      <Text layoutX="14.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Account Name:">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font>
+      </Text>
+      <TextField layoutX="14.0" layoutY="323.0" prefHeight="25.0" prefWidth="675.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0" />
+      <Text layoutX="13.0" layoutY="392.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Claim Amount:">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font>
+      </Text>
+      <TextField layoutX="13.0" layoutY="400.0" prefHeight="25.0" prefWidth="675.0" stylesheets="@../../Styles/login.css" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0" />
+      <Button fx:id="backButton" layoutX="231.0" layoutY="723.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="91.0" style="-fx-background-color: red;" text="Back" textFill="WHITE" AnchorPane.leftAnchor="231.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="saveButton" layoutX="383.0" layoutY="723.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="91.0" style="-fx-background-color: green;" text="Save" textFill="WHITE" AnchorPane.rightAnchor="226.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Pane layoutX="15.0" layoutY="479.0" prefHeight="200.0" prefWidth="675.0" style="-fx-background-color: white;" styleClass="shadow" stylesheets="@../../Styles/policyHolderDashBoard.css" />
+   </children>
+</AnchorPane>
