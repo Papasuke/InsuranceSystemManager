@@ -5,16 +5,21 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.system.Model.Claim;
 import org.system.DataConnection.SupabaseJDBC;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -85,7 +90,6 @@ public class policyHolderClaimController implements Initializable {
 
     private void loadData() {
         connection = SupabaseJDBC.mintDatabase();
-//        cutsomerCol.setCellValueFactory(data -> data.getValue().userNameProperty());
         cutsomerCol.setCellValueFactory(new PropertyValueFactory<>("insuredPerson"));
         refreshTable();
 
@@ -115,9 +119,27 @@ public class policyHolderClaimController implements Initializable {
 
     @FXML
     private void close(MouseEvent event) {
-        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+//        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+//        stage.close();
+        javafx.application.Platform.exit();
     }
+
+    @FXML
+    private void getAddView(MouseEvent event) {
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/Customer/addClaim.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+
 
 
 }
