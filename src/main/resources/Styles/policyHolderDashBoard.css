@@ -29,6 +29,18 @@
     -fx-background-color: green;
 }
 
+.close_button:hover {
+    -fx-color:red;
+    -fx-cursor: hand;
+}
+
 .shadow {
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+}
+
+.table-view .column-header, .table-view .filler{
+        -fx-size:50px;
+        -fx-border-width: 0 0 10 0;
+        -fx-background-color:transparent;
+
 }

@@ -1,7 +1,11 @@
 package org.system.Model;
 
 public class Claim {
-    String insuredPerson;
+    private String insuredPerson;
+
+    public Claim(String insuredPerson) {
+        this.insuredPerson = insuredPerson;
+    }
 
     public void setInsuredPerson(String insuredPerson) {
         this.insuredPerson = insuredPerson;

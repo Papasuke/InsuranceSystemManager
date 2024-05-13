@@ -7,6 +7,7 @@ module InsuranceSystemManager {
 
     opens org.system to javafx.fxml;
     opens org.system.Controller to javafx.fxml;
+    opens org.system.Model;
     exports org.system;
     exports org.system.Controller;
     exports org.system.Application;
