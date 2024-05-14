@@ -1,4 +1,4 @@
-package org.system.Controller;
+package org.system.Controller.Customer;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;
@@ -10,6 +10,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.system.Controller.SharedVariable;
+import org.system.DataConnection.SupabaseJDBC;
 import org.system.Model.Claim;
 
 import java.net.URL;
@@ -62,6 +64,7 @@ public class addClaimCustomer implements Initializable {
     }
     @FXML
     private void save(MouseEvent event) {
+        connection = SupabaseJDBC.mintDatabase();
         if (bankAccountNum.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);

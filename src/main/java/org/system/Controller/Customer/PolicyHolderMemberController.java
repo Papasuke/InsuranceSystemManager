@@ -1,4 +1,4 @@
-package org.system.Controller;
+package org.system.Controller.Customer;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;

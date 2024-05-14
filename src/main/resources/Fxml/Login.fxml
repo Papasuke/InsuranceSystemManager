@@ -72,12 +72,12 @@
                </font>
             </Label>
             <FontAwesomeIconView fx:id="close_button" glyphName="CLOSE" layoutX="323.0" layoutY="25.0" onMouseClicked="#onCloseClicked" size="25" styleClass="closeButton" AnchorPane.rightAnchor="7.357143402099609" AnchorPane.topAnchor="3.5714282989501953" />
-            <CheckBox layoutX="25.0" layoutY="326.0" mnemonicParsing="false" styleClass="closeButton" text="Show Password">
+            <CheckBox fx:id="showPwdCheckBox" layoutX="25.0" layoutY="326.0" mnemonicParsing="false" styleClass="closeButton" text="Show Password">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
             </CheckBox>
-            <ComboBox layoutX="113.0" layoutY="432.0" prefWidth="150.0" />
+            <ComboBox fx:id="selectRole" layoutX="113.0" layoutY="432.0" prefWidth="150.0" />
          </children>
       </AnchorPane>
    </right>

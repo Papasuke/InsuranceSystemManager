@@ -1,4 +1,4 @@
-package org.system.Controller;
+package org.system.Controller.Customer;
 
 public class PolicyHolderController {
 }

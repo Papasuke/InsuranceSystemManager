@@ -11,4 +11,6 @@ module InsuranceSystemManager {
     exports org.system;
     exports org.system.Controller;
     exports org.system.Application;
+    exports org.system.Controller.Customer;
+    opens org.system.Controller.Customer to javafx.fxml;
 }
