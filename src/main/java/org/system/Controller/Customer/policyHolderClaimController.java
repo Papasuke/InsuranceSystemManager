@@ -1,19 +1,23 @@
 package org.system.Controller.Customer;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 import org.system.Controller.SharedVariable;
 import org.system.Model.Claim;
 import org.system.DataConnection.SupabaseJDBC;
@@ -91,18 +95,112 @@ public class policyHolderClaimController implements Initializable {
     private void loadData() {
         connection = SupabaseJDBC.mintDatabase();
         refreshTable();
-        idCol.setCellValueFactory(new PropertyValueFactory<>("claimId"));
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         cutsomerCol.setCellValueFactory(new PropertyValueFactory<>("insuredPerson"));
         createCol.setCellValueFactory(new PropertyValueFactory<>("createDate"));
         exanCol.setCellValueFactory(new PropertyValueFactory<>("examDate"));
-        claimCol.setCellValueFactory(new PropertyValueFactory<>("insuredPerson"));
+        claimCol.setCellValueFactory(new PropertyValueFactory<>("claimAmount"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
-        editCol.setCellValueFactory(new PropertyValueFactory<>("insuredPerson"));
+        refresh_button.setOnMouseClicked((MouseEvent event) -> {
+            refreshTable();
+        });
+        Callback<TableColumn<Claim, String>, TableCell<Claim, String>> cellFoctory = (TableColumn<Claim, String> param) -> {
+            // make cell containing buttons
+            final TableCell<Claim, String> cell = new TableCell<Claim, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    //that cell created only on non-empty rows
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+
+                    } else {
+
+                        FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
+                        FontAwesomeIconView editIcon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL_SQUARE);
+
+                        deleteIcon.setStyle(
+                                " -fx-cursor: hand ;"
+                                        + "-glyph-size:20px;"
+                                        + "-fx-fill:#ff1744;"
+                        );
+                        editIcon.setStyle(
+                                " -fx-cursor: hand ;"
+                                        + "-glyph-size:20px;"
+                                        + "-fx-fill:#00E676;"
+                        );
+                        deleteIcon.setOnMouseClicked((MouseEvent event) -> {
+
+                            try {
+
+
+                                claim = claimTable.getSelectionModel().getSelectedItem();
+                                Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to delete Claim ID: " +claim.getId() + " ?", ButtonType.YES, ButtonType.NO);
+                                confirmAlert.showAndWait();
+                                if (confirmAlert.getResult() == ButtonType.YES) {
+                                    query = "DELETE FROM \"claims\" WHERE \"id\"="+ claim.getId();
+                                    System.out.println(query);
+                                    connection = SupabaseJDBC.mintDatabase();
+                                    preparedStatement = connection.prepareStatement(query);
+                                    preparedStatement.execute();
+                                    refreshTable();
+                                }
+                            } catch (SQLException ex) {
+                                Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+
+
+
+
+
+                        });
+                        editIcon.setOnMouseClicked((MouseEvent event) -> {
+
+                            claim = claimTable.getSelectionModel().getSelectedItem();
+                            FXMLLoader loader = new FXMLLoader ();
+                            loader.setLocation(getClass().getResource("/Fxml/Customer/addClaim.fxml"));
+                            try {
+                                loader.load();
+                            } catch (IOException ex) {
+                                Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+
+                            addClaimCustomer addClaimCustomer = loader.getController();
+                            addClaimCustomer.setUpdate(true);
+                            addClaimCustomer.setTextField(claim.getId(), claim.getBankName(), claim.getBankAccount(),claim.getGetBankAccountName(),claim.getClaimAmount(),claim.getDescription());
+                            Parent parent = loader.getRoot();
+                            Stage stage = new Stage();
+                            stage.setScene(new Scene(parent));
+                            stage.initStyle(StageStyle.UTILITY);
+                            stage.show();
+                            refreshTable();
+                        });
+
+
+                        HBox managebtn = new HBox(editIcon, deleteIcon);
+                        managebtn.setStyle("-fx-alignment:center");
+                        HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 3));
+                        HBox.setMargin(editIcon, new Insets(2, 3, 0, 2));
+
+                        setGraphic(managebtn);
+
+                        setText(null);
+
+                    }
+                }
+
+            };
+
+            return cell;
+        };
+        editCol.setCellFactory(cellFoctory);
+        claimTable.setItems(claimList);
 
     }
 
     private void refreshTable() {
-        System.out.println("hello");
+        System.out.println("refreshTableKeke");
         try {
             claimList.clear();
 //            query = "SELECT COUNT(*) AS count FROM Claims"; // replace with your SQL query
@@ -120,13 +218,14 @@ public class policyHolderClaimController implements Initializable {
             while (resultSet.next()){
 
                 claimList.add(new Claim(
-                        resultSet.getString("claimId"),
+                        resultSet.getInt("id"),
                         resultSet.getString("insuredPerson"),
                         resultSet.getDate("createDate"),
                         resultSet.getDate("examDate"),
                         resultSet.getString("bankName"),
                         resultSet.getString("bankAccount"),
                         resultSet.getString("getBankAccountName"),
+                        resultSet.getInt("claimAmount"),
                         resultSet.getString("description"),
                         resultSet.getString("status")));
                 claimTable.setItems(claimList);
@@ -163,6 +262,7 @@ public class policyHolderClaimController implements Initializable {
         }
 
     }
+
 
     public void hello() {
         statusFilter.getItems().addAll("Processing", "Done", "All");

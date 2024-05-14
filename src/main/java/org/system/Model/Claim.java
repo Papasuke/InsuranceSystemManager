@@ -3,30 +3,45 @@ package org.system.Model;
 import java.util.Date;
 
 public class Claim {
-    private String claimId;
+    private int id;
     private String insuredPerson;
     private Date createDate;
     private Date examDate;
     private String bankName;
     private String bankAccount;
     private String getBankAccountName;
+    private int claimAmount;
     private String description;
     private String status;
 
-    public Claim(String claimId, String insuredPerson, Date createDate, Date examDate, String bankName, String bankAccount, String getBankAccountName, String description, String status) {
-        this.claimId = claimId;
+    public Claim(int id, String insuredPerson, Date createDate, Date examDate, String bankName, String bankAccount, String getBankAccountName, int claimAmount, String description, String status) {
+        this.id = id;
         this.insuredPerson = insuredPerson;
         this.createDate = createDate;
         this.examDate = examDate;
         this.bankName = bankName;
         this.bankAccount = bankAccount;
         this.getBankAccountName = getBankAccountName;
+        this.claimAmount = claimAmount;
         this.description = description;
         this.status = status;
     }
 
-    public String getClaimId() {
-        return claimId;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+    public int getClaimAmount() {
+        return claimAmount;
+    }
+
+    public void setClaimAmount(int claimAmount) {
+        this.claimAmount = claimAmount;
     }
 
     public String getInsuredPerson() {
@@ -57,9 +72,6 @@ public class Claim {
         return description;
     }
 
-    public void setClaimId(String claimId) {
-        this.claimId = claimId;
-    }
 
     public void setInsuredPerson(String insuredPerson) {
         this.insuredPerson = insuredPerson;
@@ -97,8 +109,4 @@ public class Claim {
         return status;
     }
 
-    @Override
-    public String toString() {
-        return STR."Claim{claimId='\{claimId}\{'\''}, insuredPerson='\{insuredPerson}\{'\''}, createDate=\{createDate}, examDate=\{examDate}, bankName='\{bankName}\{'\''}, bankAccount='\{bankAccount}\{'\''}, getBankAccountName='\{getBankAccountName}\{'\''}, description='\{description}\{'\''}, status=\{status}\{'}'}";
-    }
 }
