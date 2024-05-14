@@ -123,7 +123,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor></FontAwesomeIconView>
                         <FontAwesomeIconView fx:id="addClaim" fill="#0090fe" glyphName="FILE" layoutX="828.0" layoutY="95.0" onMouseClicked="#getAddView" size="40" AnchorPane.bottomAnchor="599.2857131958008" AnchorPane.rightAnchor="76.28571319580078" AnchorPane.topAnchor="60.71428680419922" />
-                        <FontAwesomeIconView fx:id="refresh_button" fill="#61ff00" glyphName="REFRESH" layoutX="890.0" layoutY="95.0" size="40" AnchorPane.bottomAnchor="599.0" AnchorPane.rightAnchor="25.71428680419922" AnchorPane.topAnchor="60.71428680419922" />
+                        <FontAwesomeIconView fx:id="refresh_button" fill="#61ff00" glyphName="REFRESH" layoutX="890.0" layoutY="95.0" onMouseClicked="#refreshTable" size="40" AnchorPane.bottomAnchor="599.0" AnchorPane.rightAnchor="25.71428680419922" AnchorPane.topAnchor="60.71428680419922" />
                         <ComboBox fx:id="statusFilter" layoutX="725.0" layoutY="69.0" prefHeight="25.0" prefWidth="98.0" promptText="Choose..." AnchorPane.rightAnchor="127.0" />
                         <Text fill="#140707" layoutX="682.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status" wrappingWidth="34.970703125" AnchorPane.rightAnchor="233.029296875">
                            <font>

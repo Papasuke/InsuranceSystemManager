@@ -10,8 +10,12 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.system.Model.Claim;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
 public class addClaimCustomer implements Initializable {
@@ -43,8 +47,16 @@ public class addClaimCustomer implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+    String query = null;
+    Connection connection = null;
+    ResultSet resultSet = null;
+    PreparedStatement preparedStatement;
+    Claim student = null;
+    private boolean update;
+    int studentId;
     @FXML
     private void close(MouseEvent event) {
+        SharedVariable.openOnce = false;
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
@@ -71,4 +83,20 @@ public class addClaimCustomer implements Initializable {
         }
 
     }
+    private void getQuery() {
+
+        if (update == false) {
+
+            query = "INSERT INTO \"claims\"( `name`, `birth`, `adress`, `email`) VALUES (?,?,?,?)";
+
+        }else{
+            query = "UPDATE `student` SET "
+                    + "`name`=?,"
+                    + "`birth`=?,"
+                    + "`adress`=?,"
+                    + "`email`= ? WHERE id = '"+studentId+"'";
+        }
+
+    }
+
 }
