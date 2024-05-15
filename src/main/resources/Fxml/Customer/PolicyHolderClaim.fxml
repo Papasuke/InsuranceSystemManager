@@ -37,7 +37,7 @@
                                 </Text>
                                 <Circle fill="WHITE" layoutX="120.0" layoutY="98.0" radius="63.0" stroke="WHITE" strokeType="INSIDE" AnchorPane.topAnchor="35.0" />
                                 <FontAwesomeIconView fill="#170808" glyphName="USER" layoutX="84.0" layoutY="137.0" size="100" text="" />
-                                <AnchorPane layoutY="270.0" prefHeight="70.0" prefWidth="250.0" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                                <AnchorPane fx:id="mainMenu" layoutY="270.0" onMouseClicked="#handleMainMenuClick" prefHeight="70.0" prefWidth="250.0" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
                                     <children>
                                         <FontAwesomeIconView fill="WHITE" glyphName="HOME" layoutX="14.0" layoutY="45.0" size="30" styleClass="option_box">
                                             <font>
@@ -51,7 +51,7 @@
                                         </Text>
                                     </children>
                                 </AnchorPane>
-                                <AnchorPane layoutY="340.0" prefHeight="70.0" prefWidth="250.0" style="-fx-background-color: \\;" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                                <AnchorPane fx:id="memberMenu" layoutY="340.0" prefHeight="70.0" prefWidth="250.0" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
                                     <children>
                                         <FontAwesomeIconView fill="WHITE" glyphName="USERS" layoutX="14.0" layoutY="45.0" size="30" styleClass="option_box" text="" />
                                         <Text fill="WHITE" layoutX="79.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="option_box" text="MEMBERS">
@@ -61,7 +61,7 @@
                                         </Text>
                                     </children>
                                 </AnchorPane>
-                                <AnchorPane layoutY="410.0" prefHeight="70.0" prefWidth="250.0" style="-fx-background-color: white;" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                                <AnchorPane fx:id="claimMenu" layoutY="410.0" prefHeight="70.0" prefWidth="250.0" style="-fx-background-color: white;" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
                                     <children>
                                         <FontAwesomeIconView glyphName="FILE" layoutX="14.0" layoutY="45.0" size="30" styleClass="option_box" />
                                         <Text layoutX="91.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="option_box" text="CLAIMS">

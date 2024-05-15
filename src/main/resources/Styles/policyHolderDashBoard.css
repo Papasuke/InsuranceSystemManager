@@ -23,7 +23,6 @@
     -fx-cursor: hand;
     -fx-border: solid 2px black;
     -fx-background-radius: 15px;
-    -fx-background-color: #0090FE;
 }
 .edit_button:hover {
     -fx-background-color: green;
@@ -41,7 +40,7 @@
 .table-view .column-header, .table-view .filler{
         -fx-size:50px;
         -fx-border-width: 0 0 10 0;
-        -fx-background-color:transparent;
+
 }
 .table-view .table-cell {
     -fx-font-size: 15px;
