@@ -48,7 +48,7 @@ public class policyHolderClaimController implements Initializable {
     private TableColumn<Claim, String> createCol;
 
     @FXML
-    private TableColumn<Claim, String> cutsomerCol;
+    private TableColumn<Claim, String> customerCol;
 
     @FXML
     private TableColumn<Claim, String> editCol;
@@ -85,6 +85,8 @@ public class policyHolderClaimController implements Initializable {
 
     @FXML
     private AnchorPane memberMenu;
+    @FXML
+    private AnchorPane claimMenu;
 
     String query = null;
     Connection connection = null;
@@ -106,13 +108,13 @@ public class policyHolderClaimController implements Initializable {
         connection = SupabaseJDBC.mintDatabase();
         refreshTable();
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        cutsomerCol.setCellValueFactory(new PropertyValueFactory<>("insuredPerson"));
+        customerCol.setCellValueFactory(new PropertyValueFactory<>("insuredPerson"));
         createCol.setCellValueFactory(new PropertyValueFactory<>("createDate"));
         exanCol.setCellValueFactory(new PropertyValueFactory<>("examDate"));
         claimCol.setCellValueFactory(new PropertyValueFactory<>("claimAmount"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
         refresh_button.setOnMouseClicked((MouseEvent event) -> refreshTable());
-
+        claimMenu.setOnMouseClicked((MouseEvent event) -> refreshTable());
         Callback<TableColumn<Claim, String>, TableCell<Claim, String>> cellFactory = (TableColumn<Claim, String> param) -> new TableCell<Claim, String>() {
             @Override
             public void updateItem(String item, boolean empty) {
@@ -211,21 +213,26 @@ public class policyHolderClaimController implements Initializable {
         });
     }
 
+    @FXML
     private void setupStatusFilter() {
-        statusFilter.getItems().clear();
-        statusFilter.getItems().addAll("Processing", "Approve", "Reject", "All");
-        statusFilter.valueProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(claim -> {
-                if (newValue == null || newValue.equals("All")) {
-                    return true;
-                }
-                return claim.getStatus().equals(newValue);
-            });
+        if (statusFilter != null) {
+            statusFilter.getItems().clear();
+            statusFilter.getItems().addAll("Processing", "Approve", "Reject", "All");
+            statusFilter.valueProperty().addListener((observable, oldValue, newValue) -> {
+                filteredData.setPredicate(claim -> {
+                    if (newValue == null || newValue.equals("All")) {
+                        return true;
+                    }
+                    return claim.getStatus().equals(newValue);
+                });
 
-            SortedList<Claim> sortedData = new SortedList<>(filteredData);
-            sortedData.comparatorProperty().bind(claimTable.comparatorProperty());
-            claimTable.setItems(sortedData);
-        });
+                SortedList<Claim> sortedData = new SortedList<>(filteredData);
+                sortedData.comparatorProperty().bind(claimTable.comparatorProperty());
+                claimTable.setItems(sortedData);
+            });
+        } else {
+            Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, "statusFilter ComboBox is null");
+        }
     }
 
     private void refreshTable() {
@@ -305,5 +312,25 @@ public class policyHolderClaimController implements Initializable {
             Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    @FXML
+    private void memberMenuClick(MouseEvent event) {
+        try {
+            // Load the new FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Customer/PolicyHolderMembers.fxml"));
+            Parent parent = loader.load();
+            Scene newScene = new Scene(parent);
+
+            // Get the current stage using the memberMenu (assuming memberMenu is a Node)
+            Stage currentStage = (Stage) memberMenu.getScene().getWindow();
+
+            // Set the new scene on the current stage
+            currentStage.setScene(newScene);
+            currentStage.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 
 };

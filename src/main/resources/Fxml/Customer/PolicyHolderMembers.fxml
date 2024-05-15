@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollBar?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.system.Controller.Customer.PolicyHolderController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.system.Controller.Customer.PolicyHolderMemberController">
     <children>
         <AnchorPane prefHeight="200.0" prefWidth="200.0">
             <children>
@@ -35,7 +36,7 @@
                                 </Text>
                                 <Circle fill="WHITE" layoutX="120.0" layoutY="98.0" radius="63.0" stroke="WHITE" strokeType="INSIDE" AnchorPane.topAnchor="35.0" />
                                 <FontAwesomeIconView fill="#170808" glyphName="USER" layoutX="84.0" layoutY="137.0" size="100" text="" />
-                                <AnchorPane layoutY="270.0" prefHeight="70.0" prefWidth="250.0" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                                <AnchorPane fx:id="mainMenu" layoutY="270.0" prefHeight="70.0" prefWidth="250.0" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
                                     <children>
                                         <FontAwesomeIconView fill="WHITE" glyphName="HOME" layoutX="14.0" layoutY="45.0" size="30" styleClass="option_box">
                                             <font>
@@ -49,7 +50,7 @@
                                         </Text>
                                     </children>
                                 </AnchorPane>
-                                <AnchorPane layoutY="340.0" prefHeight="70.0" prefWidth="250.0" style="-fx-background-color: white;" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                                <AnchorPane fx:id="memberMenu" layoutY="340.0" prefHeight="70.0" prefWidth="250.0" style="-fx-background-color: white;" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
                                     <children>
                                         <FontAwesomeIconView glyphName="USERS" layoutX="14.0" layoutY="45.0" size="30" styleClass="option_box" />
                                         <Text layoutX="79.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="option_box" text="MEMBERS">
@@ -59,7 +60,7 @@
                                         </Text>
                                     </children>
                                 </AnchorPane>
-                                <AnchorPane layoutY="410.0" prefHeight="70.0" prefWidth="250.0" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                                <AnchorPane fx:id="claimMenu" layoutY="410.0" prefHeight="70.0" prefWidth="250.0" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
                                     <children>
                                         <FontAwesomeIconView fill="WHITE" glyphName="FILE" layoutX="14.0" layoutY="45.0" size="30" styleClass="option_box" />
                                         <Text fill="WHITE" layoutX="91.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="option_box" text="CLAIMS">
@@ -84,7 +85,7 @@
                         </AnchorPane>
                     </left>
                     <center>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" stylesheets="@../../Styles/policyHolderDashBoard.css" BorderPane.alignment="CENTER">
+                        <AnchorPane fx:id="closeButton" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" stylesheets="@../../Styles/policyHolderDashBoard.css" BorderPane.alignment="CENTER">
                             <children>
                                 <Label layoutX="14.0" layoutY="14.0" text="Members Details">
                                     <font>
@@ -95,7 +96,7 @@
                            <children>
                               <TableView layoutX="22.0" layoutY="0.8" prefHeight="558.0" prefWidth="908.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="-5.0">
                                 <columns>
-                                  <TableColumn fx:id="idCol" prefWidth="76.80001336336136" text="CID" />
+                                  <TableColumn fx:id="idCol" prefWidth="76.80001336336136" text="ID" />
                                   <TableColumn fx:id="nameCol" prefWidth="165.60001373291016" text="Name" />
                                     <TableColumn fx:id="usernameCol" minWidth="0.0" prefWidth="127.20002746582031" text="Username" />
                                     <TableColumn fx:id="emailCol" prefWidth="194.39993286132812" text="Email" />
@@ -108,14 +109,25 @@
                            </children>
                                 </AnchorPane>
                                 <Line endX="799.0" layoutX="125.0" layoutY="53.0" startX="-110.0" AnchorPane.leftAnchor="13.600000000000023" AnchorPane.rightAnchor="25.5" />
-                        <TextField layoutX="17.0" layoutY="65.0" prefHeight="33.0" prefWidth="438.0" promptText="Search..." style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 10px;" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="495.0">
+                        <TextField fx:id="searchBar" layoutX="17.0" layoutY="65.0" prefHeight="33.0" prefWidth="438.0" promptText="Search..." style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 10px;" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="495.0">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </TextField>
                         <FontAwesomeIconView glyphName="SEARCH" layoutX="424.0" layoutY="90.0" size="25" text="" AnchorPane.rightAnchor="502.7857151031494" />
-                        <FontAwesomeIconView fx:id="addMember" fill="#0090fe" glyphName="USER_PLUS" layoutX="828.0" layoutY="95.0" size="40" AnchorPane.bottomAnchor="599.2857131958008" AnchorPane.rightAnchor="76.28571319580078" AnchorPane.topAnchor="60.71428680419922" />
-                        <FontAwesomeIconView fx:id="refresh_button" fill="#61ff00" glyphName="REFRESH" layoutX="890.0" layoutY="95.0" size="40" AnchorPane.bottomAnchor="599.0" AnchorPane.rightAnchor="25.71428680419922" AnchorPane.topAnchor="60.71428680419922" />
+                        <FontAwesomeIconView fx:id="addMember" fill="#0090fe" glyphName="USER_PLUS" layoutX="828.0" layoutY="95.0" size="40" AnchorPane.bottomAnchor="599.2857131958008" AnchorPane.rightAnchor="76.28571319580078" AnchorPane.topAnchor="60.71428680419922">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></FontAwesomeIconView>
+                        <FontAwesomeIconView fx:id="refresh_button" fill="#61ff00" glyphName="REFRESH" layoutX="890.0" layoutY="95.0" size="40" AnchorPane.bottomAnchor="599.0" AnchorPane.rightAnchor="25.71428680419922" AnchorPane.topAnchor="60.71428680419922">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></FontAwesomeIconView>
+                        <FontAwesomeIconView glyphName="CLOSE" layoutX="922.0" layoutY="28.0" size="30">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </FontAwesomeIconView>
                             </children>
                         </AnchorPane>
                     </center>

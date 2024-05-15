@@ -46,7 +46,7 @@
                               </Text>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="memberMenu" layoutY="340.0" prefHeight="70.0" prefWidth="250.0" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                        <AnchorPane fx:id="memberMenu" layoutY="340.0" onMouseClicked="#memberMenuClick" prefHeight="70.0" prefWidth="250.0" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
                            <children>
                               <FontAwesomeIconView fill="WHITE" glyphName="USERS" layoutX="14.0" layoutY="45.0" size="30" styleClass="option_box" />
                               <Text fill="WHITE" layoutX="79.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="option_box" text="MEMBERS">

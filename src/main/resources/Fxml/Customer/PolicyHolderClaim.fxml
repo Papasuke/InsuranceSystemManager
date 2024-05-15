@@ -51,7 +51,7 @@
                                         </Text>
                                     </children>
                                 </AnchorPane>
-                                <AnchorPane fx:id="memberMenu" layoutY="340.0" prefHeight="70.0" prefWidth="250.0" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                                <AnchorPane fx:id="memberMenu" layoutY="340.0" onMouseClicked="#memberMenuClick" prefHeight="70.0" prefWidth="250.0" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
                                     <children>
                                         <FontAwesomeIconView fill="WHITE" glyphName="USERS" layoutX="14.0" layoutY="45.0" size="30" styleClass="option_box" text="" />
                                         <Text fill="WHITE" layoutX="79.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="option_box" text="MEMBERS">
@@ -88,7 +88,7 @@
                     <center>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" stylesheets="@../../Styles/policyHolderDashBoard.css" BorderPane.alignment="CENTER">
                             <children>
-                                <Label layoutX="14.0" layoutY="14.0" text="Members Details">
+                                <Label layoutX="14.0" layoutY="14.0" text="Claim List">
                                     <font>
                                         <Font name="Arial Bold" size="34.0" />
                                     </font>
@@ -98,7 +98,7 @@
                               <TableView fx:id="claimTable" layoutX="22.0" layoutY="0.8" prefHeight="558.0" prefWidth="908.0" stylesheets="@../../Styles/policyHolderDashBoard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="-5.0">
                                 <columns>
                                   <TableColumn fx:id="idCol" prefWidth="123.0" text="Claim ID" />
-                                  <TableColumn fx:id="cutsomerCol" prefWidth="194.0" text="Insured Person" />
+                                  <TableColumn fx:id="customerCol" prefWidth="194.0" text="Insured Person" />
                                     <TableColumn fx:id="createCol" minWidth="0.0" prefWidth="133.0" text="Created Date" />
                                     <TableColumn fx:id="exanCol" prefWidth="139.0" text="Exam Date" />
                                     <TableColumn fx:id="claimCol" prefWidth="125.0" text="Claim Amout" />
@@ -122,9 +122,18 @@
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></FontAwesomeIconView>
-                        <FontAwesomeIconView fx:id="addClaim" fill="#0090fe" glyphName="FILE" layoutX="828.0" layoutY="95.0" onMouseClicked="#getAddView" size="40" AnchorPane.bottomAnchor="599.2857131958008" AnchorPane.rightAnchor="76.28571319580078" AnchorPane.topAnchor="60.71428680419922" />
-                        <FontAwesomeIconView fx:id="refresh_button" fill="#61ff00" glyphName="REFRESH" layoutX="890.0" layoutY="95.0" size="40" AnchorPane.bottomAnchor="599.0" AnchorPane.rightAnchor="25.71428680419922" AnchorPane.topAnchor="60.71428680419922" />
-                        <ComboBox fx:id="statusFilter" layoutX="725.0" layoutY="69.0" prefHeight="25.0" prefWidth="98.0" promptText="Choose..." AnchorPane.rightAnchor="127.0" />
+                        <FontAwesomeIconView fx:id="addClaim" fill="#0090fe" glyphName="FILE" layoutX="828.0" layoutY="95.0" onMouseClicked="#getAddView" size="40" AnchorPane.bottomAnchor="599.2857131958008" AnchorPane.rightAnchor="76.28571319580078" AnchorPane.topAnchor="60.71428680419922">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></FontAwesomeIconView>
+                        <FontAwesomeIconView fx:id="refresh_button" fill="#61ff00" glyphName="REFRESH" layoutX="890.0" layoutY="95.0" size="40" AnchorPane.bottomAnchor="599.0" AnchorPane.rightAnchor="25.71428680419922" AnchorPane.topAnchor="60.71428680419922">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></FontAwesomeIconView>
+                        <ComboBox fx:id="statusFilter" layoutX="725.0" layoutY="69.0" prefHeight="25.0" prefWidth="98.0" promptText="Choose..." AnchorPane.rightAnchor="127.0">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></ComboBox>
                         <Text fill="#140707" layoutX="682.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status" wrappingWidth="34.970703125" AnchorPane.rightAnchor="233.029296875">
                            <font>
                               <Font name="Bell MT Bold" size="12.0" />

@@ -92,4 +92,23 @@ public class PolicyHolderController implements Initializable {
             Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    @FXML
+    private void memberMenuClick(MouseEvent event) {
+        try {
+            // Load the new FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Customer/PolicyHolderMembers.fxml"));
+            Parent parent = loader.load();
+            Scene newScene = new Scene(parent);
+
+            // Get the current stage using the memberMenu (assuming memberMenu is a Node)
+            Stage currentStage = (Stage) memberMenu.getScene().getWindow();
+
+            // Set the new scene on the current stage
+            currentStage.setScene(newScene);
+            currentStage.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
