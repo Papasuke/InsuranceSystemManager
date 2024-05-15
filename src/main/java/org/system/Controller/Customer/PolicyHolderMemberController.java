@@ -2,9 +2,13 @@ package org.system.Controller.Customer;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 
-public class PolicyHolderMemberController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class PolicyHolderMemberController implements Initializable {
 
     @FXML
     private FontAwesomeIconView addMember;
@@ -33,4 +37,8 @@ public class PolicyHolderMemberController {
     @FXML
     private TableColumn<?, ?> usernameCol;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }
