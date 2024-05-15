@@ -24,7 +24,6 @@ import org.system.Controller.SharedVariable;
 import org.system.Model.Claim;
 import org.system.DataConnection.SupabaseJDBC;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -75,24 +74,25 @@ public class policyHolderClaimController implements Initializable {
     private TextField searchBar;
 
     @FXML
-    private TableColumn<?, ?> statusCol;
+    private TableColumn<Claim, String> statusCol;
 
     @FXML
     private ComboBox<String> statusFilter;
 
     String query = null;
-    Connection connection = null ;
-    PreparedStatement preparedStatement = null ;
-    ResultSet resultSet = null ;
-    Claim claim = null ;
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+    Claim claim = null;
 
     ObservableList<Claim> claimList = FXCollections.observableArrayList();
-
+    FilteredList<Claim> filteredData;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadData();
         setupSearchFilter();
+        setupStatusFilter();
     }
 
     private void loadData() {
@@ -104,105 +104,76 @@ public class policyHolderClaimController implements Initializable {
         exanCol.setCellValueFactory(new PropertyValueFactory<>("examDate"));
         claimCol.setCellValueFactory(new PropertyValueFactory<>("claimAmount"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
-        refresh_button.setOnMouseClicked((MouseEvent event) -> {
-            refreshTable();
-        });
-        Callback<TableColumn<Claim, String>, TableCell<Claim, String>> cellFoctory = (TableColumn<Claim, String> param) -> {
-            // make cell containing buttons
-            final TableCell<Claim, String> cell = new TableCell<Claim, String>() {
-                @Override
-                public void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    //that cell created only on non-empty rows
-                    if (empty) {
-                        setGraphic(null);
-                        setText(null);
+        refresh_button.setOnMouseClicked((MouseEvent event) -> refreshTable());
 
-                    } else {
+        Callback<TableColumn<Claim, String>, TableCell<Claim, String>> cellFactory = (TableColumn<Claim, String> param) -> new TableCell<Claim, String>() {
+            @Override
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
+                    FontAwesomeIconView editIcon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL_SQUARE);
 
-                        FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
-                        FontAwesomeIconView editIcon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL_SQUARE);
+                    deleteIcon.setStyle("-fx-cursor: hand; -glyph-size:20px; -fx-fill:#ff1744;");
+                    editIcon.setStyle("-fx-cursor: hand; -glyph-size:20px; -fx-fill:#00E676;");
 
-                        deleteIcon.setStyle(
-                                " -fx-cursor: hand ;"
-                                        + "-glyph-size:20px;"
-                                        + "-fx-fill:#ff1744;"
-                        );
-                        editIcon.setStyle(
-                                " -fx-cursor: hand ;"
-                                        + "-glyph-size:20px;"
-                                        + "-fx-fill:#00E676;"
-                        );
-                        deleteIcon.setOnMouseClicked((MouseEvent event) -> {
-
-                            try {
-
-
-                                claim = claimTable.getSelectionModel().getSelectedItem();
-                                Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to delete Claim ID: " +claim.getId() + " ?", ButtonType.YES, ButtonType.NO);
-                                confirmAlert.showAndWait();
-                                if (confirmAlert.getResult() == ButtonType.YES) {
-                                    query = "DELETE FROM \"claims\" WHERE \"id\"="+ claim.getId();
-                                    System.out.println(query);
-                                    connection = SupabaseJDBC.mintDatabase();
-                                    preparedStatement = connection.prepareStatement(query);
-                                    preparedStatement.execute();
-                                    refreshTable();
-                                }
-                            } catch (SQLException ex) {
-                                Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-
-
-
-
-
-                        });
-                        editIcon.setOnMouseClicked((MouseEvent event) -> {
-
+                    deleteIcon.setOnMouseClicked((MouseEvent event) -> {
+                        try {
                             claim = claimTable.getSelectionModel().getSelectedItem();
-                            FXMLLoader loader = new FXMLLoader ();
-                            loader.setLocation(getClass().getResource("/Fxml/Customer/addClaim.fxml"));
-                            try {
-                                loader.load();
-                            } catch (IOException ex) {
-                                Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
+                            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to delete Claim ID: " + claim.getId() + " ?", ButtonType.YES, ButtonType.NO);
+                            confirmAlert.showAndWait();
+                            if (confirmAlert.getResult() == ButtonType.YES) {
+                                query = "DELETE FROM \"claims\" WHERE \"id\"=" + claim.getId();
+                                connection = SupabaseJDBC.mintDatabase();
+                                preparedStatement = connection.prepareStatement(query);
+                                preparedStatement.execute();
+                                refreshTable();
                             }
+                        } catch (SQLException ex) {
+                            Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    });
 
-                            addClaimCustomer addClaimCustomer = loader.getController();
-                            addClaimCustomer.setUpdate(true);
-                            addClaimCustomer.setTextField(claim.getId(), claim.getBankName(), claim.getBankAccount(),claim.getGetBankAccountName(),claim.getClaimAmount(),claim.getDescription());
-                            Parent parent = loader.getRoot();
-                            Stage stage = new Stage();
-                            stage.setScene(new Scene(parent));
-                            stage.initStyle(StageStyle.UTILITY);
-                            stage.show();
-                            refreshTable();
-                        });
+                    editIcon.setOnMouseClicked((MouseEvent event) -> {
+                        claim = claimTable.getSelectionModel().getSelectedItem();
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("/Fxml/Customer/addClaim.fxml"));
+                        try {
+                            loader.load();
+                        } catch (IOException ex) {
+                            Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
 
+                        addClaimCustomer addClaimCustomer = loader.getController();
+                        addClaimCustomer.setUpdate(true);
+                        addClaimCustomer.setTextField(claim.getId(), claim.getBankName(), claim.getBankAccount(), claim.getGetBankAccountName(), claim.getClaimAmount(), claim.getDescription());
+                        Parent parent = loader.getRoot();
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(parent));
+                        stage.initStyle(StageStyle.UTILITY);
+                        stage.show();
+                        refreshTable();
+                    });
 
-                        HBox managebtn = new HBox(editIcon, deleteIcon);
-                        managebtn.setStyle("-fx-alignment:center");
-                        HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 3));
-                        HBox.setMargin(editIcon, new Insets(2, 3, 0, 2));
+                    HBox managebtn = new HBox(editIcon, deleteIcon);
+                    managebtn.setStyle("-fx-alignment:center");
+                    HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 3));
+                    HBox.setMargin(editIcon, new Insets(2, 3, 0, 2));
 
-                        setGraphic(managebtn);
-
-                        setText(null);
-
-                    }
+                    setGraphic(managebtn);
+                    setText(null);
                 }
-
-            };
-
-            return cell;
+            }
         };
-        editCol.setCellFactory(cellFoctory);
+        editCol.setCellFactory(cellFactory);
         claimTable.setItems(claimList);
-
     }
+
     private void setupSearchFilter() {
-        FilteredList<Claim> filteredData = new FilteredList<>(claimList, b -> true);
+        filteredData = new FilteredList<>(claimList, b -> true);
 
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(claim -> {
@@ -226,31 +197,38 @@ public class policyHolderClaimController implements Initializable {
                 }
                 return false;
             });
-        });
 
-        SortedList<Claim> sortedData = new SortedList<>(filteredData);
-        sortedData.comparatorProperty().bind(claimTable.comparatorProperty());
-        claimTable.setItems(sortedData);
+            SortedList<Claim> sortedData = new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(claimTable.comparatorProperty());
+            claimTable.setItems(sortedData);
+        });
+    }
+
+    private void setupStatusFilter() {
+        statusFilter.getItems().clear();
+        statusFilter.getItems().addAll("Processing", "Approve", "Reject", "All");
+        statusFilter.valueProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(claim -> {
+                if (newValue == null || newValue.equals("All")) {
+                    return true;
+                }
+                return claim.getStatus().equals(newValue);
+            });
+
+            SortedList<Claim> sortedData = new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(claimTable.comparatorProperty());
+            claimTable.setItems(sortedData);
+        });
     }
 
     private void refreshTable() {
-        System.out.println("refreshTableKeke");
         try {
             claimList.clear();
-//            query = "SELECT COUNT(*) AS count FROM Claims"; // replace with your SQL query
-//            preparedStatement = connection.prepareStatement(query);
-//            resultSet = preparedStatement.executeQuery();
-//            if (resultSet.next()) {
-//                int count = resultSet.getInt("count");
-//                System.out.println("Total number of objects: " + count);
-//            }
-
             query = "SELECT * FROM \"claims\"";
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()){
-
+            while (resultSet.next()) {
                 claimList.add(new Claim(
                         resultSet.getInt("id"),
                         resultSet.getString("insuredPerson"),
@@ -262,10 +240,9 @@ public class policyHolderClaimController implements Initializable {
                         resultSet.getInt("claimAmount"),
                         resultSet.getString("description"),
                         resultSet.getString("status")));
-                claimTable.setItems(claimList);
             }
-
-
+            setupSearchFilter(); // Refresh search filter after loading data
+            setupStatusFilter(); // Refresh status filter after loading data
         } catch (SQLException ex) {
             Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -276,6 +253,7 @@ public class policyHolderClaimController implements Initializable {
         SharedVariable.openOnce = false;
         javafx.application.Platform.exit();
     }
+
 
     @FXML
     private void getAddView(MouseEvent event) {
@@ -297,12 +275,4 @@ public class policyHolderClaimController implements Initializable {
 
     }
 
-
-    public void hello() {
-        statusFilter.getItems().addAll("Processing", "Done", "All");
-    }
-
-
-
-
-}
+};

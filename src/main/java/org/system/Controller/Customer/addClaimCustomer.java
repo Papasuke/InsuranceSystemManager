@@ -131,7 +131,7 @@ private void insert() {
 //            int count = resultSet.getInt("count");
 //            System.out.println("Total number of objects: " + count);
 //        }
-        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, insuredPerson.getText());
         preparedStatement.setString(2, bankName.getText());
         preparedStatement.setString(3, bankAccountNum.getText());
