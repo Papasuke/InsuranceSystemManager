@@ -53,6 +53,7 @@ public class addClaimCustomer implements Initializable {
 
     }
     String query = null;
+    String sql = null;
     Connection connection = null;
     ResultSet resultSet = null;
     PreparedStatement preparedStatement;
@@ -107,14 +108,15 @@ public class addClaimCustomer implements Initializable {
             query = "INSERT INTO \"claims\"( \"insuredPerson\", \"bankName\", \"bankAccount\", \"getBankAccountName\", \"claimAmount\",\"description\",\"status\" ) VALUES (?,?,?,?,?,?,?)";
 
         }else{
-            query = "UPDATE \"claims\" SET "
-                    + "\"insuredPerson\"=?,"
-                    + "\"bankName\"=?,"
-                    + "\"bankAccountNum\"=?,"
-                    + "\"bankAccountName\"= ?,"
-                    +  "\"claimAmount\"= ?,"
-                    + "\"description\"= ?,"
-                    + "\"status\"= ? WHERE \"id\" = '"+ claimId;
+//            query = "UPDATE \"claims\" SET "
+//                    + "\"insuredPerson\"=?,"
+//                    + "\"bankName\"=?,"
+//                    + "\"bankAccountNum\"=?,"
+//                    + "\"bankAccountName\"= ?,"
+//                    +  "\"claimAmount\"= ?,"
+//                    + "\"description\"= ?,"
+//                    + "\"status\"= ? WHERE \"id\" = '"+ claimId;
+            String sql = "UPDATE claims SET insuredPerson=?, bankName=?, bankAccountNum=?, bankAccountName=?, claimAmount=?, description=?, status=? WHERE id = ?";
         }
 
     }
@@ -129,7 +131,7 @@ private void insert() {
 //            int count = resultSet.getInt("count");
 //            System.out.println("Total number of objects: " + count);
 //        }
-        preparedStatement = connection.prepareStatement(query);
+        preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, insuredPerson.getText());
         preparedStatement.setString(2, bankName.getText());
         preparedStatement.setString(3, bankAccountNum.getText());
@@ -137,7 +139,7 @@ private void insert() {
         preparedStatement.setInt(5, Integer.parseInt(claimAmount.getText()));
         preparedStatement.setString(6, descriptionBox.getText());
         preparedStatement.setString(7, "Processing");
-        preparedStatement.execute();
+        preparedStatement.executeUpdate()   ;
 
     } catch (SQLException ex) {
         Logger.getLogger(addClaimCustomer.class.getName()).log(Level.SEVERE, null, ex);

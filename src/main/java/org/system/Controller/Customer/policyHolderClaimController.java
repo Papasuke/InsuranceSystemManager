@@ -4,6 +4,8 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -90,6 +92,7 @@ public class policyHolderClaimController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadData();
+        setupSearchFilter();
     }
 
     private void loadData() {
@@ -197,6 +200,37 @@ public class policyHolderClaimController implements Initializable {
         editCol.setCellFactory(cellFoctory);
         claimTable.setItems(claimList);
 
+    }
+    private void setupSearchFilter() {
+        FilteredList<Claim> filteredData = new FilteredList<>(claimList, b -> true);
+
+        searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(claim -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (claim.getInsuredPerson().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (claim.getBankName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (claim.getDescription().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (String.valueOf(claim.getId()).contains(lowerCaseFilter)) {
+                    return true;
+                } else if (String.valueOf(claim.getClaimAmount()).contains(lowerCaseFilter)) {
+                    return true;
+                } else if (claim.getStatus().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        SortedList<Claim> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(claimTable.comparatorProperty());
+        claimTable.setItems(sortedData);
     }
 
     private void refreshTable() {
