@@ -105,32 +105,16 @@ public class addClaimCustomer implements Initializable {
     private void getQuery() {
 
         if (!update) {
-            query = "INSERT INTO \"claims\"( \"insuredPerson\", \"bankName\", \"bankAccount\", \"getBankAccountName\", \"claimAmount\",\"description\",\"status\" ) VALUES (?,?,?,?,?,?,?)";
+            query = "INSERT INTO \"claims\"( \"insuredPerson\", \"bankName\", \"bankAccountName\", \"bankAccountNum\", \"claimAmount\",\"description\",\"status\" ) VALUES (?,?,?,?,?,?,?)";
 
         }else{
-//            query = "UPDATE \"claims\" SET "
-//                    + "\"insuredPerson\"=?,"
-//                    + "\"bankName\"=?,"
-//                    + "\"bankAccountNum\"=?,"
-//                    + "\"bankAccountName\"= ?,"
-//                    +  "\"claimAmount\"= ?,"
-//                    + "\"description\"= ?,"
-//                    + "\"status\"= ? WHERE \"id\" = '"+ claimId;
-            String sql = "UPDATE claims SET insuredPerson=?, bankName=?, bankAccountNum=?, bankAccountName=?, claimAmount=?, description=?, status=? WHERE id = ?";
+            query = "UPDATE claims SET \"insuredPerson\"=?, \"bankName\"=?, \"bankAccountNum\"=?, \"bankAccountName\"=?, \"claimAmount\"=?, \"description\"=?, \"status\"=? WHERE id=?";
         }
 
     }
 private void insert() {
 
     try {
-//        String countQuery = null;
-//        countQuery = "SELECT COUNT(*) AS count FROM Claims"; // replace with your SQL query
-//        preparedStatement = connection.prepareStatement(countQuery);
-//        resultSet = preparedStatement.executeQuery();
-//        if (resultSet.next()) {
-//            int count = resultSet.getInt("count");
-//            System.out.println("Total number of objects: " + count);
-//        }
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, insuredPerson.getText());
         preparedStatement.setString(2, bankName.getText());
@@ -139,17 +123,19 @@ private void insert() {
         preparedStatement.setInt(5, Integer.parseInt(claimAmount.getText()));
         preparedStatement.setString(6, descriptionBox.getText());
         preparedStatement.setString(7, "Processing");
-        preparedStatement.executeUpdate()   ;
+        if (update) {
+            preparedStatement.setInt(8, claimId);
+        }
+        preparedStatement.executeUpdate();
 
     } catch (SQLException ex) {
         Logger.getLogger(addClaimCustomer.class.getName()).log(Level.SEVERE, null, ex);
     }
 
 }
-    void setTextField(int id, String bankNameText, String bankAccountNumText, String bankAccountNameText, int claimAmountNum, String description) {
-
+    void setTextField(int id,String insuredCustomer, String bankNameText, String bankAccountNumText, String bankAccountNameText, int claimAmountNum, String description) {
         claimId = id;
-        insuredPerson.setText(String.valueOf(id));
+        insuredPerson.setText(insuredCustomer);
         bankName.setText(bankNameText);
         bankAccountNum.setText(bankAccountNumText);
         bankAccountName.setText(bankAccountNameText);

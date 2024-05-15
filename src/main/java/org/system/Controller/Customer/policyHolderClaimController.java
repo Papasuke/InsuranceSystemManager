@@ -149,7 +149,7 @@ public class policyHolderClaimController implements Initializable {
 
                         addClaimCustomer addClaimCustomer = loader.getController();
                         addClaimCustomer.setUpdate(true);
-                        addClaimCustomer.setTextField(claim.getId(), claim.getBankName(), claim.getBankAccount(), claim.getGetBankAccountName(), claim.getClaimAmount(), claim.getDescription());
+                        addClaimCustomer.setTextField(claim.getId(), claim.getInsuredPerson(),claim.getBankName(), claim.getBankAccountName(), claim.getBankAccountNum(), claim.getClaimAmount(), claim.getDescription());
                         Parent parent = loader.getRoot();
                         Stage stage = new Stage();
                         stage.setScene(new Scene(parent));
@@ -235,8 +235,8 @@ public class policyHolderClaimController implements Initializable {
                         resultSet.getDate("createDate"),
                         resultSet.getDate("examDate"),
                         resultSet.getString("bankName"),
-                        resultSet.getString("bankAccount"),
-                        resultSet.getString("getBankAccountName"),
+                        resultSet.getString("bankAccountName"),
+                        resultSet.getString("bankAccountNum"),
                         resultSet.getInt("claimAmount"),
                         resultSet.getString("description"),
                         resultSet.getString("status")));

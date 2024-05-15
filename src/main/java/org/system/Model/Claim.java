@@ -8,20 +8,20 @@ public class Claim {
     private Date createDate;
     private Date examDate;
     private String bankName;
-    private String bankAccount;
-    private String getBankAccountName;
+    private String bankAccountName;
+    private String bankAccountNum;
     private int claimAmount;
     private String description;
     private String status;
 
-    public Claim(int id, String insuredPerson, Date createDate, Date examDate, String bankName, String bankAccount, String getBankAccountName, int claimAmount, String description, String status) {
+    public Claim(int id, String insuredPerson, Date createDate, Date examDate, String bankName, String bankAccountName, String bankAccountNum, int claimAmount, String description, String status) {
         this.id = id;
         this.insuredPerson = insuredPerson;
         this.createDate = createDate;
         this.examDate = examDate;
         this.bankName = bankName;
-        this.bankAccount = bankAccount;
-        this.getBankAccountName = getBankAccountName;
+        this.bankAccountName = bankAccountName;
+        this.bankAccountNum = bankAccountNum;
         this.claimAmount = claimAmount;
         this.description = description;
         this.status = status;
@@ -60,12 +60,12 @@ public class Claim {
         return bankName;
     }
 
-    public String getBankAccount() {
-        return bankAccount;
+    public String getBankAccountName() {
+        return bankAccountName;
     }
 
-    public String getGetBankAccountName() {
-        return getBankAccountName;
+    public String getBankAccountNum() {
+        return bankAccountNum;
     }
 
     public String getDescription() {
@@ -89,12 +89,12 @@ public class Claim {
         this.bankName = bankName;
     }
 
-    public void setBankAccount(String bankAccount) {
-        this.bankAccount = bankAccount;
+    public void setBankAccountName(String bankAccountName) {
+        this.bankAccountName = bankAccountName;
     }
 
-    public void setGetBankAccountName(String getBankAccountName) {
-        this.getBankAccountName = getBankAccountName;
+    public void setBankAccountNum(String bankAccountNum) {
+        this.bankAccountNum = bankAccountNum;
     }
 
     public void setDescription(String description) {
