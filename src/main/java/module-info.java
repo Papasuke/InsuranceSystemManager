@@ -4,6 +4,7 @@ module InsuranceSystemManager {
     requires javafx.fxml;
     requires de.jensd.fx.glyphs.fontawesome;
     requires javafx.controls;
+    requires jsoup;
 
     opens org.system to javafx.fxml;
     opens org.system.Controller to javafx.fxml;

@@ -73,5 +73,6 @@
             <Font name="Arial" size="24.0" />
          </font>
       </Text>
+      <Text fx:id="errorText" layoutX="14.0" layoutY="632.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>

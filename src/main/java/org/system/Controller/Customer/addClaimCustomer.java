@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.system.Controller.SharedVariable;
 import org.system.DataConnection.SupabaseJDBC;
@@ -21,6 +23,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static org.jsoup.helper.StringUtil.isNumeric;
 
 public class addClaimCustomer implements Initializable {
     @FXML
@@ -47,6 +51,8 @@ public class addClaimCustomer implements Initializable {
 
     @FXML
     private Button saveButton;
+    @FXML
+    private Text errorText;
     int claimId;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -77,12 +83,11 @@ public class addClaimCustomer implements Initializable {
     @FXML
     private void save(MouseEvent event) {
         connection = SupabaseJDBC.mintDatabase();
-        if (bankAccountNum.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Please Fill All Data");
-            alert.showAndWait();
-        } else  {
+        if (bankAccountNum.getText().isEmpty() || claimAmount.getText().isEmpty()) {
+            showError("Please fill all data");
+        } else if (!isNumeric(bankAccountNum.getText()) || !isNumeric(claimAmount.getText())) {
+            showError("Account number and claim amount must be numeric");
+        } else {
             Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to save?", ButtonType.YES, ButtonType.NO);
             confirmAlert.showAndWait();
 
@@ -100,7 +105,12 @@ public class addClaimCustomer implements Initializable {
                 stage.close();
             }
         }
+    }
 
+    private void showError(String message) {
+        errorText.setText(message);
+        errorText.setFill(Color.RED);
+        errorText.setVisible(true);
     }
     private void getQuery() {
 
