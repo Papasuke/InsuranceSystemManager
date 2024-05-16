@@ -23,12 +23,26 @@
     -fx-cursor: hand;
     -fx-border: solid 2px black;
     -fx-background-radius: 15px;
-    -fx-background-color: #0090FE;
 }
 .edit_button:hover {
     -fx-background-color: green;
 }
 
+.close_button:hover {
+    -fx-color:red;
+    -fx-cursor: hand;
+}
+
 .shadow {
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
 }
+
+.table-view .column-header, .table-view .filler{
+        -fx-size:50px;
+        -fx-border-width: 0 0 10 0;
+
+}
+.table-view .table-cell {
+    -fx-font-size: 15px;
+}
+

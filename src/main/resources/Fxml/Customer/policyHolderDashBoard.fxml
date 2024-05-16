@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.system.Controller.PolicyHolderController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.system.Controller.Customer.PolicyHolderController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -46,7 +46,7 @@
                               </Text>
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutY="340.0" prefHeight="70.0" prefWidth="250.0" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                        <AnchorPane fx:id="memberMenu" layoutY="340.0" onMouseClicked="#memberMenuClick" prefHeight="70.0" prefWidth="250.0" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
                            <children>
                               <FontAwesomeIconView fill="WHITE" glyphName="USERS" layoutX="14.0" layoutY="45.0" size="30" styleClass="option_box" />
                               <Text fill="WHITE" layoutX="79.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="option_box" text="MEMBERS">
@@ -56,7 +56,7 @@
                               </Text>
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutY="410.0" prefHeight="70.0" prefWidth="250.0" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
+                        <AnchorPane fx:id="claimMenu" layoutY="410.0" onMouseClicked="#claimMenuClick" prefHeight="70.0" prefWidth="250.0" styleClass="option_box" stylesheets="@../../Styles/policyHolderDashBoard.css">
                            <children>
                               <FontAwesomeIconView fill="WHITE" glyphName="FILE" layoutX="14.0" layoutY="45.0" size="30" styleClass="option_box" />
                               <Text fill="WHITE" layoutX="91.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="option_box" text="CLAIMS">
@@ -69,7 +69,7 @@
                         <AnchorPane layoutY="626.0" prefHeight="50.0" prefWidth="250.0" styleClass="logout_box" stylesheets="@../../Styles/policyHolderDashBoard.css" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="0.0">
                            <children>
                               <Button layoutX="8.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="58.0" styleClass="logout_button" stylesheets="@../../Styles/policyHolderDashBoard.css" textFill="#eeeeee" />
-                              <FontAwesomeIconView fill="WHITE" glyphName="SIGN_OUT" layoutX="23.0" layoutY="35.0" size="30" />
+                              <FontAwesomeIconView fx:id="logoutButton" fill="WHITE" glyphName="SIGN_OUT" layoutX="23.0" layoutY="35.0" size="30" />
                               <Label layoutX="77.0" layoutY="15.0" text="Logout" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold Italic" size="17.0" />
@@ -96,7 +96,7 @@
                                  </font>
                               </Label>
                               <FontAwesomeIconView glyphName="FILE" layoutX="230.0" layoutY="43.0" size="30" />
-                              <Label layoutX="122.0" layoutY="65.0" text="2">
+                              <Label fx:id="totalClaim" layoutX="122.0" layoutY="65.0" text="2">
                                  <font>
                                     <Font name="Arial" size="48.0" />
                                  </font>
@@ -111,7 +111,7 @@
                                  </font>
                               </Label>
                               <FontAwesomeIconView glyphName="USERS" layoutX="223.0" layoutY="48.0" size="30" />
-                              <Label layoutX="122.0" layoutY="69.0" text="3">
+                              <Label fx:id="totalMember" layoutX="122.0" layoutY="69.0" text="3">
                                  <font>
                                     <Font name="Arial" size="48.0" />
                                  </font>
@@ -131,7 +131,7 @@
                                  </font>
                               </Label>
                               <FontAwesomeIconView glyphName="CREDIT_CARD" layoutX="223.0" layoutY="44.0" size="30" />
-                              <Label layoutX="52.0" layoutY="71.0" text="1000000">
+                              <Label fx:id="totalFee" layoutX="52.0" layoutY="71.0" text="1000000">
                                  <font>
                                     <Font name="Arial" size="48.0" />
                                  </font>
@@ -152,7 +152,7 @@
                                           <Font name="Arial Italic" size="28.0" />
                                        </font>
                                     </Label>
-                                    <Text layoutX="170.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TRAN NGOC MINH">
+                                    <Text fx:id="fullnameFld" layoutX="170.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TRAN NGOC MINH">
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>
@@ -166,7 +166,7 @@
                                           <Font name="Arial Italic" size="28.0" />
                                        </font>
                                     </Label>
-                                    <Text layoutX="168.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mintdunno">
+                                    <Text fx:id="usernameFld" layoutX="168.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mintdunno">
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>
@@ -180,7 +180,7 @@
                                           <Font name="Arial Italic" size="28.0" />
                                        </font>
                                     </Label>
-                                    <Text layoutX="220.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="s3911737@rmit.edu.vn">
+                                    <Text fx:id="emailFld" layoutX="220.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="s3911737@rmit.edu.vn">
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>
@@ -194,14 +194,14 @@
                                           <Font name="Arial Italic" size="28.0" />
                                        </font>
                                     </Label>
-                                    <Text layoutX="121.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0901234567">
+                                    <Text fx:id="phoneFld" layoutX="121.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0901234567">
                                        <font>
                                           <Font name="System Bold" size="24.0" />
                                        </font>
                                     </Text>
                                  </children>
                               </AnchorPane>
-                              <Button layoutX="389.0" layoutY="342.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="157.0" style="-fx-background-radius: 20px;" text=" EDIT" textFill="WHITE" AnchorPane.leftAnchor="389.0" AnchorPane.rightAnchor="371.0" AnchorPane.topAnchor="342.0">
+                              <Button fx:id="editButton" layoutX="389.0" layoutY="342.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="157.0" style="-fx-background-radius: 20px;" text=" EDIT" textFill="WHITE" AnchorPane.leftAnchor="389.0" AnchorPane.rightAnchor="371.0" AnchorPane.topAnchor="342.0">
                                  <font>
                                     <Font name="System Bold" size="27.0" />
                                  </font>
@@ -216,6 +216,7 @@
                            </children>
                         </AnchorPane>
                         <Line endX="799.0" layoutX="133.0" layoutY="234.0" startX="-110.0" AnchorPane.bottomAnchor="465.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="233.5" />
+                        <FontAwesomeIconView fx:id="closeButton" glyphName="CLOSE" layoutX="915.0" layoutY="28.0" onMouseClicked="#close" size="30" />
                      </children>
                   </AnchorPane>
                </center>
