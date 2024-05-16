@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static org.jsoup.helper.StringUtil.isNumeric;
+//import static org.jsoup.helper.StringUtil.isNumeric;
 
 public class addClaimCustomer implements Initializable {
     @FXML
@@ -87,6 +87,8 @@ public class addClaimCustomer implements Initializable {
             showError("Please fill all data");
         } else if (!isNumeric(bankAccountNum.getText()) || !isNumeric(claimAmount.getText())) {
             showError("Account number and claim amount must be numeric");
+        } else if (bankAccountNum.getText().length() > 10 || claimAmount.getText().length() > 10) {
+            showError("Account number and claim amount must not exceed 10 digits");
         } else {
             Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to save?", ButtonType.YES, ButtonType.NO);
             confirmAlert.showAndWait();
@@ -111,6 +113,10 @@ public class addClaimCustomer implements Initializable {
         errorText.setText(message);
         errorText.setFill(Color.RED);
         errorText.setVisible(true);
+    }
+
+    private boolean isNumeric(String str) {
+        return str.matches("\\d+");
     }
     private void getQuery() {
 

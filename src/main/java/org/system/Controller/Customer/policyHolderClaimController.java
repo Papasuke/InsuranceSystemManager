@@ -255,6 +255,7 @@ public class policyHolderClaimController implements Initializable {
                         resultSet.getString("description"),
                         resultSet.getString("status")));
             }
+            resultSet.close();
             setupSearchFilter(); // Refresh search filter after loading data
             setupStatusFilter(); // Refresh status filter after loading data
         } catch (SQLException ex) {
