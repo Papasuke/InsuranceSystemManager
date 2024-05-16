@@ -83,7 +83,12 @@ public class addClaimCustomer implements Initializable {
     @FXML
     private void save(MouseEvent event) {
         connection = SupabaseJDBC.mintDatabase();
-        if (bankAccountNum.getText().isEmpty() || claimAmount.getText().isEmpty()) {
+        if (insuredPerson.getText().isEmpty() ||
+                bankName.getText().isEmpty() ||
+                bankAccountNum.getText().isEmpty() ||
+                bankAccountName.getText().isEmpty() ||
+                claimAmount.getText().isEmpty() ||
+                descriptionBox.getText().isEmpty()) {
             showError("Please fill all data");
         } else if (!isNumeric(bankAccountNum.getText()) || !isNumeric(claimAmount.getText())) {
             showError("Account number and claim amount must be numeric");

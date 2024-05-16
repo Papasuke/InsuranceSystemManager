@@ -13,6 +13,7 @@ public class Claim {
     private int claimAmount;
     private String description;
     private String status;
+    private String approver;
 
     public Claim(int id, String insuredPerson, Date createDate, Date examDate, String bankName, String bankAccountName, String bankAccountNum, int claimAmount, String description, String status) {
         this.id = id;
@@ -27,6 +28,20 @@ public class Claim {
         this.status = status;
     }
 
+    public Claim(int id, String insuredPerson, Date createDate, Date examDate, String bankName, String bankAccountName, String bankAccountNum, int claimAmount, String description, String status, String approver) {
+        this.id = id;
+        this.insuredPerson = insuredPerson;
+        this.createDate = createDate;
+        this.examDate = examDate;
+        this.bankName = bankName;
+        this.bankAccountName = bankAccountName;
+        this.bankAccountNum = bankAccountNum;
+        this.claimAmount = claimAmount;
+        this.description = description;
+        this.status = status;
+        this.approver = approver;
+    }
+
     public int getId() {
         return id;
     }
@@ -35,6 +50,13 @@ public class Claim {
         this.id = id;
     }
 
+    public String getApprover() {
+        return approver;
+    }
+
+    public void setApprover(String approver) {
+        this.approver = approver;
+    }
 
     public int getClaimAmount() {
         return claimAmount;
