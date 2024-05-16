@@ -316,16 +316,21 @@ public class policyHolderClaimController implements Initializable {
     private void memberMenuClick(MouseEvent event) {
         try {
             // Load the new FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Customer/PolicyHolderMembers.fxml"));
-            Parent parent = loader.load();
+            Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/Customer/PolicyHolderMembers.fxml"));
             Scene newScene = new Scene(parent);
 
-            // Get the current stage using the memberMenu (assuming memberMenu is a Node)
+            // Get the current stage using the mainMenu AnchorPane
             Stage currentStage = (Stage) memberMenu.getScene().getWindow();
 
-            // Set the new scene on the current stage
-            currentStage.setScene(newScene);
-            currentStage.show();
+            // Create the new stage and set the scene
+            Stage newStage = new Stage();
+            newStage.setScene(newScene);
+            newStage.initModality(Modality.APPLICATION_MODAL); // Optional: Make the new stage modal if needed
+            newStage.initStyle(StageStyle.UNDECORATED); // Optional: Set new stage style if needed
+            newStage.show();
+
+            // Close the current stage
+            currentStage.close();
 
         } catch (IOException ex) {
             Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
