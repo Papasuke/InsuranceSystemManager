@@ -7,14 +7,19 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.system.Controller.SharedVariable;
 import org.system.DataConnection.SupabaseJDBC;
 import org.system.Model.Claim;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -53,6 +58,14 @@ public class addClaimCustomer implements Initializable {
     private Button saveButton;
     @FXML
     private Text errorText;
+    @FXML
+    private Button uploadButton;
+
+    @FXML
+    private HBox imageContainer;
+
+    @FXML
+    private ImageView zoomImageView;
     int claimId;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -168,6 +181,33 @@ private void insert() {
     void setUpdate(boolean b) {
         this.update = b;
 
+    }
+    @FXML
+    private void uploadImage(MouseEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+        );
+        File file = fileChooser.showOpenDialog(((Node) event.getSource()).getScene().getWindow());
+        if (file != null) {
+            Image image = new Image(file.toURI().toString());
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(100);
+            imageView.setFitHeight(100);
+            imageView.setPreserveRatio(true);
+            imageView.setOnMouseClicked(e -> zoomImage(image));
+            imageContainer.getChildren().add(imageView);
+        }
+    }
+
+    private void zoomImage(Image image) {
+        zoomImageView.setImage(image);
+        zoomImageView.setVisible(true);
+    }
+
+    @FXML
+    private void hideZoomImage(MouseEvent event) {
+        zoomImageView.setVisible(false);
     }
 
 }
