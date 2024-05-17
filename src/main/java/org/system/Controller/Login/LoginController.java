@@ -11,6 +11,8 @@ import org.system.utils.SceneController;
 
 import java.io.IOException;
 
+import static org.system.Controller.SharedVariable.loggedInAccount;
+
 public class LoginController {
 
     @FXML
@@ -40,7 +42,7 @@ public class LoginController {
     }
 
     @FXML
-    void handleLoginButtonClick(ActionEvent event) {
+    void handleLoginButtonClick(MouseEvent event) {
         String username = username_input.getText();
         String password = showPwdCheckBox.isSelected() ? password_text.getText() : password_input.getText();
         String role = selectRole.getValue();
@@ -57,10 +59,12 @@ public class LoginController {
         Account account = new AccountDAOImpl().login(username, password, role);
 
         if (account != null) {
+            loggedInAccount = account;
             if(role == "POLICYHOLDER"){
                 try {
                     SceneController.switchSceneCustomer(event, "policyHolderDashBoard");
                     System.out.println("login success");
+                    System.out.println(loggedInAccount.toString());
                 } catch (IOException e) {
                     // Handle the IOException here, e.g.,
                     System.err.println("Error switching scene: " + e.getMessage());

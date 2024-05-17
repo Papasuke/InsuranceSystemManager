@@ -24,6 +24,7 @@ import javafx.util.Callback;
 import org.system.Controller.SharedVariable;
 import org.system.Model.Claim;
 import org.system.DataConnection.SupabaseJDBC;
+import org.system.utils.SceneController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -292,49 +293,17 @@ public class policyHolderClaimController implements Initializable {
     @FXML
     private void handleMainMenuClick(MouseEvent event) {
         try {
-            // Load the new FXML
-            Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/Customer/policyHolderDashBoard.fxml"));
-            Scene newScene = new Scene(parent);
-
-            // Get the current stage using the mainMenu AnchorPane
-            Stage currentStage = (Stage) mainMenu.getScene().getWindow();
-
-            // Create the new stage and set the scene
-            Stage newStage = new Stage();
-            newStage.setScene(newScene);
-            newStage.initModality(Modality.APPLICATION_MODAL); // Optional: Make the new stage modal if needed
-            newStage.initStyle(StageStyle.UNDECORATED); // Optional: Set new stage style if needed
-            newStage.show();
-
-            // Close the current stage
-            currentStage.close();
-
-        } catch (IOException ex) {
-            Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
+            SceneController.switchSceneCustomer(event, "policyHolderDashBoard");
+        } catch (IOException e) {
+            System.err.println("Error switching scene: " + e.getMessage());
         }
     }
     @FXML
     private void memberMenuClick(MouseEvent event) {
         try {
-            // Load the new FXML
-            Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/Customer/PolicyHolderMembers.fxml"));
-            Scene newScene = new Scene(parent);
-
-            // Get the current stage using the mainMenu AnchorPane
-            Stage currentStage = (Stage) memberMenu.getScene().getWindow();
-
-            // Create the new stage and set the scene
-            Stage newStage = new Stage();
-            newStage.setScene(newScene);
-            newStage.initModality(Modality.APPLICATION_MODAL); // Optional: Make the new stage modal if needed
-            newStage.initStyle(StageStyle.UNDECORATED); // Optional: Set new stage style if needed
-            newStage.show();
-
-            // Close the current stage
-            currentStage.close();
-
-        } catch (IOException ex) {
-            Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
+            SceneController.switchSceneCustomer(event, "PolicyHolderMembers");
+        } catch (IOException e) {
+            System.err.println("Error switching scene: " + e.getMessage());
         }
     }
 

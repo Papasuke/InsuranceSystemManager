@@ -19,6 +19,14 @@ public class Account {
         this.accType = accType;
     }
 
+    public String getAccType() {
+        return accType;
+    }
+
+    public void setAccType(String accType) {
+        this.accType = accType;
+    }
+
     public String getId() {
         return id;
     }
@@ -59,7 +67,12 @@ public class Account {
         this.phone = phone;
     }
 
-//    public AccountType getAccType() {
+    @Override
+    public String toString() {
+        return STR."Account{id='\{id}\{'\''}, username='\{username}\{'\''}, password='\{password}\{'\''}, email='\{email}\{'\''}, phone='\{phone}\{'\''}, accType='\{accType}\{'\''}\{'}'}";
+    }
+
+    //    public AccountType getAccType() {
 //        return accType;
 //    }
 //

@@ -1,9 +1,11 @@
 package org.system.Controller.Customer;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,11 +18,23 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.system.Controller.SharedVariable;
 
+
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.system.DataConnection.SupabaseJDBC;
+import org.system.Model.*;
+import org.system.utils.SceneController;
+
+import static org.system.Controller.SharedVariable.loggedInAccount;
+import static org.system.Controller.SharedVariable.loggedInPolicyHolder;
 
 public class PolicyHolderController implements Initializable {
 
@@ -62,7 +76,26 @@ public class PolicyHolderController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Account loggedInAccount = SharedVariable.loggedInAccount;
 
+        if (loggedInAccount != null && loggedInAccount.getAccType().equals("POLICYHOLDER")) {
+            try {
+                // 1. Fetch Policyholder data using the account ID
+                loggedInPolicyHolder = getPolicyholderFromDatabase(loggedInAccount.getId());
+
+                // 2. Populate FXML fields
+                fullnameFld.setText(loggedInPolicyHolder.getFullName()); // Corrected to use getFullName()
+                emailFld.setText(loggedInPolicyHolder.getEmail());
+                phoneFld.setText(loggedInPolicyHolder.getPhone());
+                // ... set other fields based on your Policyholder attributes
+            } catch (Exception e) {
+                // Handle potential exceptions during data fetching
+                System.err.println("Error fetching policyholder data: " + e.getMessage());
+            }
+        } else {
+            // Handle cases where there's no logged-in account or the account is not a Policyholder
+            System.err.println("No logged-in Policyholder account found.");
+        }
     }
     @FXML
     private void close(MouseEvent event) {
@@ -71,44 +104,52 @@ public class PolicyHolderController implements Initializable {
     @FXML
     private void claimMenuClick(MouseEvent event) {
         try {
-            // Load the new FXML
-            Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/Customer/PolicyHolderClaim.fxml"));
-            Scene newScene = new Scene(parent);
-
-            // Get the current stage using the mainMenu AnchorPane
-            Stage currentStage = (Stage) claimMenu.getScene().getWindow();
-
-            // Create the new stage and set the scene
-            Stage newStage = new Stage();
-            newStage.setScene(newScene);
-            newStage.initModality(Modality.APPLICATION_MODAL); // Optional: Make the new stage modal if needed
-            newStage.initStyle(StageStyle.UNDECORATED); // Optional: Set new stage style if needed
-            newStage.show();
-
-            // Close the current stage
-            currentStage.close();
-
-        } catch (IOException ex) {
-            Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
+            SceneController.switchSceneCustomer(event, "PolicyHolderClaim");
+        } catch (IOException e) {
+            System.err.println("Error switching scene: " + e.getMessage());
         }
     }
+
     @FXML
     private void memberMenuClick(MouseEvent event) {
         try {
-            // Load the new FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Customer/PolicyHolderMembers.fxml"));
-            Parent parent = loader.load();
-            Scene newScene = new Scene(parent);
-
-            // Get the current stage using the memberMenu (assuming memberMenu is a Node)
-            Stage currentStage = (Stage) memberMenu.getScene().getWindow();
-
-            // Set the new scene on the current stage
-            currentStage.setScene(newScene);
-            currentStage.show();
-
-        } catch (IOException ex) {
-            Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
+            SceneController.switchSceneCustomer(event, "PolicyHolderMembers");
+        } catch (IOException e) {
+            System.err.println("Error switching scene: " + e.getMessage());
         }
     }
+    private PolicyHolder getPolicyholderFromDatabase(String accountId) {
+        try (Connection connection = SupabaseJDBC.mintDatabase()) {
+            String sql = "SELECT * FROM PolicyHolder WHERE policyholder_id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, accountId);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        // Process the result set and create a Policyholder object
+                        String policyholderId = resultSet.getString("policyholder_id");
+                        String username = resultSet.getString("username");
+                        String password = resultSet.getString("password");
+                        String email = resultSet.getString("email");
+                        String phone = resultSet.getString("phone");
+                        String fullName = resultSet.getString("fullname");
+                        int insuranceFee = resultSet.getInt("insuranceFee");
+                        // ... fetch claimId and dependentId (you'll need to handle the array data type)
+                        return new PolicyHolder(policyholderId, username, password, email, phone, "POLICYHOLDER", fullName, insuranceFee /*, claimId, dependentId */);
+                    } else {
+                        // Handle case where no Policyholder is found for the given accountId
+                        return null;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            // Handle SQL exceptions
+            System.err.println("Error fetching policyholder from database: " + e.getMessage());
+        }
+        return null;
+    }
+
+
 }
+
+
+
