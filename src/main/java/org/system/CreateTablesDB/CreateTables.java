@@ -18,6 +18,7 @@ public class CreateTables {
 
             // Create the PolicyHolder table
             CreateTableFunctions.createPolicyHolderTable(connection);
+            CreateTableFunctions.createDependentTable(connection);
 
         } catch (SQLException e) {
             System.out.println("Connection failure.");
