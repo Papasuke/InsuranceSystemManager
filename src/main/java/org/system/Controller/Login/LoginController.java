@@ -57,13 +57,15 @@ public class LoginController {
         Account account = new AccountDAOImpl().login(username, password, role);
 
         if (account != null) {
-            try {
-                SceneController.switchSceneCustomer(event, "dashboard");
-                System.out.println("login success");
-            } catch (IOException e) {
-                // Handle the IOException here, e.g.,
-                System.err.println("Error switching scene: " + e.getMessage());
-                // You could also display an error alert to the user
+            if(role == "POLICYHOLDER"){
+                try {
+                    SceneController.switchSceneCustomer(event, "policyHolderDashBoard");
+                    System.out.println("login success");
+                } catch (IOException e) {
+                    // Handle the IOException here, e.g.,
+                    System.err.println("Error switching scene: " + e.getMessage());
+                    // You could also display an error alert to the user
+                }
             }
         } else {
             // Invalid credentials
