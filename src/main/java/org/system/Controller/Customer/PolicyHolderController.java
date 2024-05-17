@@ -158,27 +158,68 @@ public class PolicyHolderController implements Initializable {
     @FXML
     private void getEditView(MouseEvent event) {
         try {
-            Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/Customer/editHolderInfo.fxml"));
-            Scene scene = new Scene(parent);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.initModality(Modality.APPLICATION_MODAL);
+            // Load the FXML for the edit view
+            Parent editView = FXMLLoader.load(getClass().getResource("/Fxml/Customer/editHolderInfo.fxml"));
 
-            // Get the primary stage
+            // Create a new scene for the edit view
+            Scene editScene = new Scene(editView);
+
+            // Create a new stage for the edit window
+            Stage editStage = new Stage();
+            editStage.setScene(editScene);
+
+            // Customize the edit window (optional)
+            editStage.initStyle(StageStyle.DECORATED);
+            editStage.initModality(Modality.APPLICATION_MODAL); // Prevent interaction with main window
+
+            // Get the primary stage (for blur effect if needed)
             Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // Apply blur effect to the primary stage
+            // Apply blur effect to the primary stage (if needed)
             applyBlurEffect(primaryStage);
 
-            stage.showAndWait(); // Wait for the modal stage to close
+            // Show the edit window
+            editStage.showAndWait(); // Wait for the edit window to close
 
-            // Remove blur effect after the modal stage is closed
+            // Remove blur effect after the edit window is closed (if needed)
             removeBlurEffect(primaryStage);
+
         } catch (IOException ex) {
             Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+//    private void getEditView(MouseEvent event) {
+//        try {
+//            // Load the FXML for the edit view
+//            Parent editView = FXMLLoader.load(getClass().getResource("/Fxml/Customer/editHolderInfo.fxml"));
+//
+//            // Create a new scene for the edit view
+//            Scene editScene = new Scene(editView);
+//
+//            // Create a new stage for the edit window
+//            Stage editStage = new Stage();
+//            editStage.setScene(editScene);
+//
+//            // Customize the edit window (optional)
+//            editStage.initStyle(StageStyle.DECORATED);
+//            editStage.initModality(Modality.APPLICATION_MODAL); // Prevent interaction with main window
+//
+//            // Get the primary stage (for blur effect if needed)
+//            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//
+//            // Apply blur effect to the primary stage (if needed)
+//            applyBlurEffect(primaryStage);
+//
+//            // Show the edit window
+//            editStage.showAndWait(); // Wait for the edit window to close
+//
+//            // Remove blur effect after the edit window is closed (if needed)
+//            removeBlurEffect(primaryStage);
+//
+//        } catch (IOException ex) {
+//            Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 
     // Helper functions to apply and remove blur effect
     private void applyBlurEffect(Stage stage) {

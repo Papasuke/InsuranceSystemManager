@@ -65,4 +65,6 @@ public class PolicyHolder extends Account{
     public void setInsuranceFee(int insuranceFee) {
         this.insuranceFee = insuranceFee;
     }
+
+
 }

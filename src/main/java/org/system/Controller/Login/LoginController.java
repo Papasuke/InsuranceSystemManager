@@ -33,7 +33,7 @@ public class LoginController {
 //    private AccountDAOImpl accountDAO = new AccountDAOImpl();
 //
     public void initialize() {
-        selectRole.getItems().addAll("POLICYHOLDER", "DEPENDENT");
+        selectRole.getItems().addAll("POLICYHOLDER", "DEPENDENT","SURVEYOR","MANAGER","ADMIN");
     }
 
     @FXML

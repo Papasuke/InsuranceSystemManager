@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="550.0" style="-fx-background-color: #FFFFFF;" stylesheets="@../../Styles/policyHolderDashBoard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.system.Controller.Customer.editHolderInfo">
+<AnchorPane prefHeight="589.0" prefWidth="550.0" style="-fx-background-color: #FFFFFF;" stylesheets="@../../Styles/policyHolderDashBoard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.system.Controller.Customer.editHolderInfo">
     <children>
         <AnchorPane prefHeight="50.0" prefWidth="550.0" style="-fx-background-color: #61ACFF;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <children>
@@ -46,7 +46,7 @@
                 <Font name="Arial" size="24.0" />
             </font>
         </Text>
-        <Button fx:id="backButton" layoutX="139.0" layoutY="538.0" mnemonicParsing="false" onMouseClicked="#close" prefHeight="50.0" prefWidth="91.0" style="-fx-background-color: red;" styleClass="close_button" text="Back" textFill="WHITE" AnchorPane.leftAnchor="139.0">
+        <Button fx:id="backButton" layoutX="150.0" layoutY="514.0" mnemonicParsing="false" onMouseClicked="#close" prefHeight="50.0" prefWidth="91.0" style="-fx-background-color: red;" styleClass="close_button" text="Back" textFill="WHITE" AnchorPane.leftAnchor="150.0">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
@@ -54,7 +54,7 @@
                 <Font name="System Bold" size="15.0" />
             </font>
         </Button>
-        <Button fx:id="saveButton" layoutX="329.0" layoutY="538.0" mnemonicParsing="false"  prefHeight="50.0" prefWidth="91.0" style="-fx-background-color: green;" styleClass="close_button" text="Save" textFill="WHITE" AnchorPane.rightAnchor="130.0">
+        <Button fx:id="saveButton" layoutX="317.0" layoutY="514.0" mnemonicParsing="false" onMouseClicked="#saveChanges" prefHeight="50.0" prefWidth="91.0" style="-fx-background-color: green;" styleClass="close_button" text="Save" textFill="WHITE" AnchorPane.rightAnchor="142.0">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
@@ -67,7 +67,7 @@
                 <Font name="Arial" size="24.0" />
             </font>
         </Text>
-        <Text fx:id="errorText" layoutX="14.0" layoutY="632.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+        <Text fx:id="errorText" fill="RED" layoutX="19.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hello" visible="false" />
       <TextField fx:id="idFld" disable="true" editable="false" layoutX="14.0" layoutY="88.0" prefHeight="25.0" prefWidth="521.0" text="p000001">
          <font>
             <Font name="System Bold Italic" size="12.0" />
