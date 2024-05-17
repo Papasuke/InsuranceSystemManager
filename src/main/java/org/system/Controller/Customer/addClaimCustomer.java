@@ -117,10 +117,10 @@ public class addClaimCustomer implements Initializable {
                 clean();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 System.out.println("New Claim Added");
-                alert.setContentText("New Claim Added");
-                alert.showAndWait();
                 Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
                 stage.close();
+                alert.setContentText("New Claim Added");
+                alert.showAndWait();
             }
         }
     }

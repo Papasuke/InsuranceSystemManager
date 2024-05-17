@@ -67,31 +67,7 @@ public class LoginController {
         if (account != null) {
             loggedInAccount = account;
             if(role == "POLICYHOLDER"){
-                try {
-
-                    Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/Customer/policyHolderDashBoard.fxml"));
-                    Scene newScene = new Scene(parent);
-
-                    // Get the current stage using the mainMenu AnchorPane
-                    Stage currentStage = (Stage) loginButton.getScene().getWindow();
-
-                    // Create the new stage and set the scene
-                    Stage newStage = new Stage();
-                    newStage.setScene(newScene);
-                    newStage.initModality(Modality.APPLICATION_MODAL); // Optional: Make the new stage modal if needed
-                    newStage.initStyle(StageStyle.UNDECORATED); // Optional: Set new stage style if needed
-                    newStage.show();
-
-                    // Close the current stage
-                    currentStage.close();
-                    System.out.println("login success");
-                    System.out.println(loggedInAccount.toString());
-
-                } catch (IOException e) {
-                    // Handle the IOException here, e.g.,
-                    System.err.println("Error switching scene: " + e.getMessage());
-                    // You could also display an error alert to the user
-                }
+                getStage("/Fxml/Customer/policyHolderDashBoard.fxml");
             }
         } else {
             // Invalid credentials
@@ -116,6 +92,34 @@ public class LoginController {
             password_input.setText(password_text.getText());
             password_text.setVisible(false);
             password_input.setVisible(true);
+        }
+    }
+
+    public void getStage(String fxmlUrl) {
+        try {
+
+            Parent parent = FXMLLoader.load(getClass().getResource(fxmlUrl));
+            Scene newScene = new Scene(parent);
+
+            // Get the current stage using the mainMenu AnchorPane
+            Stage currentStage = (Stage) loginButton.getScene().getWindow();
+
+            // Create the new stage and set the scene
+            Stage newStage = new Stage();
+            newStage.setScene(newScene);
+            newStage.initModality(Modality.APPLICATION_MODAL); // Optional: Make the new stage modal if needed
+            newStage.initStyle(StageStyle.UNDECORATED); // Optional: Set new stage style if needed
+            newStage.show();
+
+            // Close the current stage
+            currentStage.close();
+            System.out.println("login success");
+            System.out.println(loggedInAccount.toString());
+
+        } catch (IOException e) {
+            // Handle the IOException here, e.g.,
+            System.err.println("Error switching scene: " + e.getMessage());
+            // You could also display an error alert to the user
         }
     }
 }
