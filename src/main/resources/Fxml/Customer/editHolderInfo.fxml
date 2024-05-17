@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="550.0" style="-fx-background-color: #FFFFFF;" stylesheets="@../../Styles/policyHolderDashBoard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.system.Controller.Customer.editHolderInfo">
+    <children>
+        <AnchorPane prefHeight="50.0" prefWidth="550.0" style="-fx-background-color: #61ACFF;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <children>
+                <FontAwesomeIconView fx:id="closeButton" fill="WHITE" glyphName="CLOSE" layoutX="662.0" layoutY="35.0" onMouseClicked="#close" size="30" styleClass="close_button" AnchorPane.rightAnchor="14.428571701049805" />
+                <Text fill="WHITE" layoutX="53.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Information">
+                    <font>
+                        <Font name="Arial" size="24.0" />
+                    </font>
+                </Text>
+            <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="14.0" layoutY="39.0" size="40" />
+            </children>
+        </AnchorPane>
+        <Text layoutX="14.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer id:">
+            <font>
+                <Font name="Arial" size="24.0" />
+            </font>
+        </Text>
+        <Text layoutX="13.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
+            <font>
+                <Font name="Arial" size="24.0" />
+            </font>
+        </Text>
+        <Text layoutX="13.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full Name:">
+            <font>
+                <Font name="Arial" size="24.0" />
+            </font>
+        </Text>
+        <Text layoutX="14.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email Adress:">
+            <font>
+                <Font name="Arial" size="24.0" />
+            </font>
+        </Text>
+        <Text layoutX="16.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number:">
+            <font>
+                <Font name="Arial" size="24.0" />
+            </font>
+        </Text>
+        <Button fx:id="backButton" layoutX="139.0" layoutY="538.0" mnemonicParsing="false" onMouseClicked="#close" prefHeight="50.0" prefWidth="91.0" style="-fx-background-color: red;" styleClass="close_button" text="Back" textFill="WHITE" AnchorPane.leftAnchor="139.0">
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+        </Button>
+        <Button fx:id="saveButton" layoutX="329.0" layoutY="538.0" mnemonicParsing="false"  prefHeight="50.0" prefWidth="91.0" style="-fx-background-color: green;" styleClass="close_button" text="Save" textFill="WHITE" AnchorPane.rightAnchor="130.0">
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+        </Button>
+        <Text layoutX="20.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insurance Fee:">
+            <font>
+                <Font name="Arial" size="24.0" />
+            </font>
+        </Text>
+        <Text fx:id="errorText" layoutX="14.0" layoutY="632.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <TextField fx:id="idFld" disable="true" editable="false" layoutX="14.0" layoutY="88.0" prefHeight="25.0" prefWidth="521.0" text="p000001">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="usernameFld" disable="true" editable="false" layoutX="16.0" layoutY="158.0" prefHeight="25.0" prefWidth="521.0" text="hello123">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="fullNameFld" layoutX="14.0" layoutY="230.0" prefHeight="25.0" prefWidth="521.0" />
+      <TextField fx:id="emailFld" layoutX="16.0" layoutY="305.0" prefHeight="25.0" prefWidth="521.0" />
+      <TextField fx:id="phoneFld" layoutX="16.0" layoutY="374.0" prefHeight="25.0" prefWidth="521.0" />
+      <TextField fx:id="feeFld" disable="true" editable="false" layoutX="16.0" layoutY="441.0" prefHeight="25.0" prefWidth="521.0" text="1000$">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </TextField>
+        <!--      <Button fx:id="uploadButton" layoutX="14.0" layoutY="623.0" onMouseClicked="#uploadImage" text="Upload Image" />-->
+        <!--      <HBox fx:id="imageContainer" spacing="10" />-->
+        <!--      <ImageView fx:id="zoomImageView" fitHeight="400" fitWidth="400" layoutX="150.0" layoutY="482.0" onMouseClicked="#hideZoomImage" visible="false" />-->
+    </children>
+</AnchorPane>

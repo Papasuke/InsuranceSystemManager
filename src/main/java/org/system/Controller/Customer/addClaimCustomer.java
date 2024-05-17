@@ -80,7 +80,6 @@ public class addClaimCustomer implements Initializable {
     private boolean update;
     @FXML
     private void close(MouseEvent event) {
-        SharedVariable.openOnce = false;
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
@@ -119,7 +118,6 @@ public class addClaimCustomer implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 System.out.println("New Claim Added");
                 alert.setContentText("New Claim Added");
-                SharedVariable.openOnce = false;
                 alert.showAndWait();
                 Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
                 stage.close();

@@ -266,7 +266,6 @@ public class policyHolderClaimController implements Initializable {
 
     @FXML
     private void close(MouseEvent event) {
-        SharedVariable.openOnce = false;
         javafx.application.Platform.exit();
     }
 
@@ -274,17 +273,13 @@ public class policyHolderClaimController implements Initializable {
     @FXML
     private void getAddView(MouseEvent event) {
         try {
-            if(!SharedVariable.openOnce) {
-                Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/Customer/addClaim.fxml"));
-                Scene scene = new Scene(parent);
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.initStyle(StageStyle.UNDECORATED);
-                stage.initModality(Modality.APPLICATION_MODAL); // This line makes the new stage modal
-                stage.show();
-                SharedVariable.openOnce = true;
-            }
-
+            Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/Customer/addClaim.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.initModality(Modality.APPLICATION_MODAL); // This line makes the new stage modal
+            stage.show();
         } catch (IOException ex) {
             Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -33,6 +34,7 @@ import org.system.DataConnection.SupabaseJDBC;
 import org.system.Model.*;
 import org.system.utils.SceneController;
 
+import static java.lang.String.valueOf;
 import static org.system.Controller.SharedVariable.loggedInAccount;
 import static org.system.Controller.SharedVariable.loggedInPolicyHolder;
 
@@ -73,6 +75,10 @@ public class PolicyHolderController implements Initializable {
 
     @FXML
     private Text usernameFld;
+    @FXML
+    private Text insuranceFee;
+    @FXML
+    private Text displayName;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -87,7 +93,9 @@ public class PolicyHolderController implements Initializable {
                 fullnameFld.setText(loggedInPolicyHolder.getFullName()); // Corrected to use getFullName()
                 emailFld.setText(loggedInPolicyHolder.getEmail());
                 phoneFld.setText(loggedInPolicyHolder.getPhone());
-                // ... set other fields based on your Policyholder attributes
+                usernameFld.setText(loggedInPolicyHolder.getUsername());
+                insuranceFee.setText(valueOf(loggedInPolicyHolder.getInsuranceFee()) + "$");
+                displayName.setText(loggedInPolicyHolder.getFullName().split(" ")[0]);
             } catch (Exception e) {
                 // Handle potential exceptions during data fetching
                 System.err.println("Error fetching policyholder data: " + e.getMessage());
@@ -146,6 +154,54 @@ public class PolicyHolderController implements Initializable {
             System.err.println("Error fetching policyholder from database: " + e.getMessage());
         }
         return null;
+    }
+    @FXML
+    private void getEditView(MouseEvent event) {
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/Customer/editHolderInfo.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            // Get the primary stage
+            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Apply blur effect to the primary stage
+            applyBlurEffect(primaryStage);
+
+            stage.showAndWait(); // Wait for the modal stage to close
+
+            // Remove blur effect after the modal stage is closed
+            removeBlurEffect(primaryStage);
+        } catch (IOException ex) {
+            Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    // Helper functions to apply and remove blur effect
+    private void applyBlurEffect(Stage stage) {
+        // Create a darkening effect (black overlay)
+        ColorAdjust darken = new ColorAdjust();
+        darken.setBrightness(-0.5); // Adjust for desired darkness
+
+        // Create the Gaussian blur effect
+        GaussianBlur blur = new GaussianBlur();
+        blur.setRadius(15); // Adjust for desired blur intensity
+
+        // Combine the darkening and blur effects
+        Effect combinedEffect = new Blend(
+                BlendMode.SRC_OVER,
+                darken,
+                blur
+        );
+
+        stage.getScene().getRoot().setEffect(combinedEffect);
+    }
+
+    private void removeBlurEffect(Stage stage) {
+        stage.getScene().getRoot().setEffect(null);
     }
 
 

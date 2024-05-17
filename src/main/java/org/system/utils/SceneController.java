@@ -17,6 +17,8 @@ public class SceneController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        // Center the stage
+        stage.centerOnScreen();
         stage.show();
     }
 }
