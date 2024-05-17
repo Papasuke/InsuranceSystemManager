@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class createPolicyHolderTable {
+public class CreateTableFunctions {
     public static void createPolicyHolderTable(Connection connection) throws SQLException {
         String dropTableSql = "DROP TABLE IF EXISTS PolicyHolder";
         String dropSequenceSql = "DROP SEQUENCE IF EXISTS policyholder_id_seq";
@@ -16,8 +16,10 @@ public class createPolicyHolderTable {
                 "email TEXT UNIQUE NOT NULL, " +
                 "phone TEXT UNIQUE NOT NULL, " +
                 "claimId TEXT[], " +
-                "dependentId TEXT[] " +
+                "dependentId TEXT[], " +
+                "accountType TEXT NOT NULL DEFAULT 'POLICYHOLDER'" + // Added accountType column
                 ")";
+
 
         try (Statement statement = connection.createStatement()) {
             // Drop the table if it exists

@@ -17,7 +17,7 @@ public class CreateTables {
             System.out.println("Connected to the PostgreSQL server successfully.");
 
             // Create the PolicyHolder table
-            createPolicyHolderTable.createPolicyHolderTable(connection);
+            CreateTableFunctions.createPolicyHolderTable(connection);
 
         } catch (SQLException e) {
             System.out.println("Connection failure.");
