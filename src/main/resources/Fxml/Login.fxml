@@ -32,7 +32,7 @@
       </AnchorPane>
    </left>
    <right>
-      <AnchorPane onMouseClicked="#onCloseClicked" prefHeight="200.0" prefWidth="415.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <AnchorPane  prefHeight="200.0" prefWidth="415.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
             <Text fill="#0090fe" fontSmoothingType="LCD" layoutX="25.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="179.06640625">
                <font>
@@ -71,7 +71,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <FontAwesomeIconView fx:id="close_button" glyphName="CLOSE" layoutX="323.0" layoutY="25.0" onMouseClicked="#onCloseClicked" size="25" styleClass="closeButton" AnchorPane.rightAnchor="7.357143402099609" AnchorPane.topAnchor="3.5714282989501953" />
+            <FontAwesomeIconView fx:id="close_button" glyphName="CLOSE" layoutX="323.0" layoutY="25.0"  size="25" styleClass="closeButton" AnchorPane.rightAnchor="7.357143402099609" AnchorPane.topAnchor="3.5714282989501953" />
             <CheckBox fx:id="showPwdCheckBox" layoutX="25.0" layoutY="326.0" mnemonicParsing="false" styleClass="closeButton" text="Show Password">
                <font>
                   <Font name="Arial" size="14.0" />
