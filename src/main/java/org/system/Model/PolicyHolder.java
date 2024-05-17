@@ -9,13 +9,12 @@ public class PolicyHolder extends Account{
         super();
         this.claimId = new ArrayList<>();
         this.dependentId = new ArrayList<>();
-        this.setAccType(AccountType.POLICYHOLDER); // Set account type to POLICYHOLDER
     }
 
-    public PolicyHolder(String username, String password, String email, String phone) {
-        super(username, password, email, phone, AccountType.POLICYHOLDER);
-        this.claimId = new ArrayList<>();
-        this.dependentId = new ArrayList<>();
+    public PolicyHolder(String id, String username, String password, String email, String phone, String accType, ArrayList<String> claimIdList, ArrayList<String> dependentIdList) {
+        super(id, username, password, email, phone, "POLICYHOLDER");
+        this.claimId = claimIdList;
+        this.dependentId = dependentIdList;
     }
 
     public ArrayList<String> getClaimId() {

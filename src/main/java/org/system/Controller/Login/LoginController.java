@@ -14,7 +14,7 @@ import java.io.IOException;
 public class LoginController {
 
     @FXML
-    private Button login_button;
+    private Button loginButton;
     @FXML
     private TextField username_input;
     @FXML
@@ -25,56 +25,69 @@ public class LoginController {
     private CheckBox showPwdCheckBox;
     @FXML
     private ComboBox<String> selectRole;
+    @FXML
+    private TextField password_text;
 
 //    private AccountDAOImpl accountDAO = new AccountDAOImpl();
 //
-//    public void initialize() {
-//        selectRole.getItems().addAll("POLICYHOLDER", "DEPENDENT");
-//    }
-//
-//    @FXML
-//    void closeWindow(MouseEvent event) {
-//        System.exit(0);
-//    }
-//
-//    @FXML
-//    void login(ActionEvent event) throws IOException {
-//        String username = username_input.getText();
-//        String password = password_input.getText();
-//        String role = selectRole.getValue();
-//
-//        if (username.isEmpty() || password.isEmpty() || role == null) {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setTitle("Error");
-//            alert.setHeaderText(null);
-//            alert.setContentText("Please fill in all fields.");
-//            alert.showAndWait();
-//            return;
-//        }
-//
-//        Account account = accountDAO.login(username, password, role);
-//
-//        if (account != null) {
-//            // Successful login
-//            SceneController.switchScene(event, "dashboard");
-//        } else {
-//            // Invalid credentials
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setTitle("Error");
-//            alert.setHeaderText(null);
-//            alert.setContentText("Invalid username or password.");
-//            alert.showAndWait();
-//        }
-//    }
+    public void initialize() {
+        selectRole.getItems().addAll("POLICYHOLDER", "DEPENDENT");
+    }
 
+    @FXML
+    void closeWindow(MouseEvent event) {
+        System.exit(0);
+    }
+
+    @FXML
+    void handleLoginButtonClick(ActionEvent event) {
+        String username = username_input.getText();
+        String password = showPwdCheckBox.isSelected() ? password_text.getText() : password_input.getText();
+        String role = selectRole.getValue();
+
+        if (username.isEmpty() || password.isEmpty() || role == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill in all fields.");
+            alert.showAndWait();
+            return;
+        }
+
+        Account account = new AccountDAOImpl().login(username, password, role);
+
+        if (account != null) {
+            try {
+                SceneController.switchSceneCustomer(event, "dashboard");
+                System.out.println("login success");
+            } catch (IOException e) {
+                // Handle the IOException here, e.g.,
+                System.err.println("Error switching scene: " + e.getMessage());
+                // You could also display an error alert to the user
+            }
+        } else {
+            // Invalid credentials
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Invalid username or password.");
+            alert.showAndWait();
+        }
+    }
+
+    boolean passToggle = true;
     @FXML
     void showPassword(ActionEvent event) {
         if (showPwdCheckBox.isSelected()) {
-            password_input.setText(password_input.getText());
-            password_input.setPromptText(password_input.getText());
+            // Show the password in the TextField
+            password_text.setText(password_input.getText());
+            password_text.setVisible(true);
+            password_input.setVisible(false);
         } else {
-            password_input.setText("");
-            password_input.setPromptText("password");
+            // Hide the password, show the PasswordField
+            password_input.setText(password_text.getText());
+            password_text.setVisible(false);
+            password_input.setVisible(true);
         }
     }
 }
