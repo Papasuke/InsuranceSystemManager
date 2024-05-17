@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.system.Controller.Customer.PolicyHolderController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" stylesheets="@../../Styles/policyHolderDashBoard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.system.Controller.Customer.PolicyHolderController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -216,7 +216,7 @@
                            </children>
                         </AnchorPane>
                         <Line endX="799.0" layoutX="133.0" layoutY="234.0" startX="-110.0" AnchorPane.bottomAnchor="465.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="233.5" />
-                        <FontAwesomeIconView fx:id="closeButton" glyphName="CLOSE" layoutX="915.0" layoutY="28.0" onMouseClicked="#close" size="30" />
+                        <FontAwesomeIconView fx:id="closeButton" glyphName="CLOSE" layoutX="915.0" layoutY="28.0" onMouseClicked="#close" size="30" styleClass="close_button" />
                      </children>
                   </AnchorPane>
                </center>
