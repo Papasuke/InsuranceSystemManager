@@ -1,27 +1,30 @@
 package org.system.Model;
 
-public abstract class Account {
+public class Account {
+    private String id;
     private String username;
     private String password;
     private String email;
     private String phone;
-    public enum AccountType {
-        POLICYHOLDER,
-        DEPENDENT,
-        SURVEYOR,
-        MANAGER,
-        ADMIN
-    }
-    private AccountType accType;
+    private String accType;
 
     public Account() {};
 
-    public Account(String username, String password, String email, String phone, AccountType accType) {
+    public Account(String id, String username, String password, String email, String phone, String accType) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.phone = phone;
         this.accType = accType;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -56,32 +59,32 @@ public abstract class Account {
         this.phone = phone;
     }
 
-    public AccountType getAccType() {
-        return accType;
-    }
-
-    public void setAccType(AccountType accType) {
-        this.accType = accType;
-    }
-
-    public void setPolicyHolder() {
-        this.accType = AccountType.POLICYHOLDER;
-    }
-
-    public void setDependent() {
-        this.accType = AccountType.DEPENDENT;
-    }
-
-    public void setSurveyor() {
-        this.accType = AccountType.SURVEYOR;
-    }
-
-    public void setManger() {
-        this.accType = AccountType.MANAGER;
-    }
-
-    public void setAdmin() {
-        this.accType = AccountType.ADMIN;
-    }
+//    public AccountType getAccType() {
+//        return accType;
+//    }
+//
+//    public void setAccType(AccountType accType) {
+//        this.accType = accType;
+//    }
+//
+//    public void setPolicyHolder() {
+//        this.accType = AccountType.POLICYHOLDER;
+//    }
+//
+//    public void setDependent() {
+//        this.accType = AccountType.DEPENDENT;
+//    }
+//
+//    public void setSurveyor() {
+//        this.accType = AccountType.SURVEYOR;
+//    }
+//
+//    public void setManger() {
+//        this.accType = AccountType.MANAGER;
+//    }
+//
+//    public void setAdmin() {
+//        this.accType = AccountType.ADMIN;
+//    }
 
 }

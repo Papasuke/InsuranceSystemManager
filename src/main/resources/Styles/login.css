@@ -9,7 +9,7 @@
     -fx-cursor: hand;
 }
 .closeButton:hover {
-    -fx-color: red;
+    -fx-fill: red;
 }
 .loginButton:hover {
     -fx-background-color: black;

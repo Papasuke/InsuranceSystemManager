@@ -6,8 +6,8 @@ public class Dependent extends Account {
     private String policyHolderId;
     private ArrayList<String> claimId;
 
-    public Dependent(String username, String password, String email, String phone, String policyHolderId) {
-        super(username, password, email, phone, AccountType.DEPENDENT);
+    public Dependent(String id,String username, String password, String email, String phone, String accType, String policyHolderId) {
+        super(id,username, password, email, phone,accType);
         this.policyHolderId = policyHolderId;
         this.claimId = new ArrayList<>();
     }
