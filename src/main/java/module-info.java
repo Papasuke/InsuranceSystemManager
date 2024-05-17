@@ -16,4 +16,6 @@ module InsuranceSystemManager {
     opens org.system.Controller.Customer to javafx.fxml;
     exports org.system.Controller.Admin;
     opens org.system.Controller.Admin to javafx.fxml;
+    exports org.system.CreateTablesDB;
+    opens org.system.CreateTablesDB to javafx.fxml;
 }
