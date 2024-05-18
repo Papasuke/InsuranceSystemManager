@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -35,6 +36,9 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static org.system.utils.UIEffects.applyBlurEffect;
+import static org.system.utils.UIEffects.removeBlurEffect;
 
 public class policyHolderClaimController implements Initializable {
     @FXML
@@ -273,13 +277,32 @@ public class policyHolderClaimController implements Initializable {
     @FXML
     private void getAddView(MouseEvent event) {
         try {
-            Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/Customer/addClaim.fxml"));
-            Scene scene = new Scene(parent);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.initModality(Modality.APPLICATION_MODAL); // This line makes the new stage modal
-            stage.show();
+            // Load the FXML for the edit view
+            Parent addView = FXMLLoader.load(getClass().getResource("/Fxml/Customer/addClaim.fxml"));
+
+            // Create a new scene for the edit view
+            Scene editScene = new Scene(addView);
+
+            // Create a new stage for the edit window
+            Stage editStage = new Stage();
+            editStage.setScene(editScene);
+
+            // Customize the edit window (optional)
+            editStage.initStyle(StageStyle.DECORATED);
+            editStage.initModality(Modality.APPLICATION_MODAL); // Prevent interaction with main window
+
+            // Get the primary stage (for blur effect if needed)
+            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Apply blur effect to the primary stage (if needed)
+            applyBlurEffect(primaryStage);
+
+            // Show the edit window
+            editStage.showAndWait(); // Wait for the edit window to close
+
+            // Remove blur effect after the edit window is closed (if needed)
+            removeBlurEffect(primaryStage);
+
         } catch (IOException ex) {
             Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
         }

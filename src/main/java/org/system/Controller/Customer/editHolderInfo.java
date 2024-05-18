@@ -124,8 +124,8 @@ public class editHolderInfo {
                 return; // Stop further processing if there's a database error
             }
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//            System.out.println("Your Information Updated");
-//            alert.setContentText("Your Information Updated");
+            System.out.println("Your Information Updated");
+            alert.setContentText("Your Information Updated");
             alert.showAndWait();
         }
         stage.close();
