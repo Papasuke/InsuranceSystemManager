@@ -37,6 +37,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static org.system.Controller.SharedVariable.loggedInPolicyHolder;
+
 public class PolicyHolderMemberController implements Initializable {
     @FXML
     private FontAwesomeIconView addMember;
@@ -93,6 +95,7 @@ public class PolicyHolderMemberController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        displayName.setText(loggedInPolicyHolder.getFullName().split(" ")[0]);
 
 //        // Initialize the table columns
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -311,6 +314,15 @@ public class PolicyHolderMemberController implements Initializable {
 
         } catch (SQLException e) {
             Logger.getLogger(PolicyHolderMemberController.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+    @FXML
+    private void logOut(MouseEvent event) {
+        SharedVariable.resetValue();
+        try {
+            SceneController.switchScene(event, "/Fxml/Login.fxml");
+        } catch (IOException e) {
+            System.err.println("Error switching scene: " + e.getMessage());
         }
     }
 

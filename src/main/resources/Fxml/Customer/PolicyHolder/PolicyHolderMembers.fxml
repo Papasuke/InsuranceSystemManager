@@ -63,7 +63,7 @@
                                 </AnchorPane>
                                 <AnchorPane layoutY="626.0" prefHeight="50.0" prefWidth="250.0" styleClass="logout_box" stylesheets="@../../../Styles/policyHolderDashBoard.css" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="0.0">
                                     <children>
-                                        <Button fx:id="logoutButton" layoutX="8.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="58.0" styleClass="logout_button" stylesheets="@../../../Styles/policyHolderDashBoard.css" textFill="#eeeeee" />
+                                        <Button fx:id="logoutButton" layoutX="8.0" mnemonicParsing="false" onMouseClicked="#logOut" prefHeight="48.0" prefWidth="58.0" styleClass="logout_button" stylesheets="@../../../Styles/policyHolderDashBoard.css" textFill="#eeeeee" />
                                         <FontAwesomeIconView fill="WHITE" glyphName="SIGN_OUT" layoutX="23.0" layoutY="35.0" size="30" />
                                         <Label layoutX="77.0" layoutY="15.0" text="Logout" textFill="WHITE">
                                             <font>

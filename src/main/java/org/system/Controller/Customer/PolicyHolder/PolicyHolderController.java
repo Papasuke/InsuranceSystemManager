@@ -31,6 +31,7 @@ import java.util.logging.Logger;
 
 import org.system.DataConnection.SupabaseJDBC;
 import org.system.Model.*;
+import org.system.utils.AdvancedFunction;
 import org.system.utils.SceneController;
 
 import static java.lang.String.valueOf;
@@ -55,7 +56,7 @@ public class PolicyHolderController implements Initializable {
     private Text fullnameFld;
 
     @FXML
-    private FontAwesomeIconView logoutButton;
+    private Button logoutButton;
 
     @FXML
     private AnchorPane memberMenu;
@@ -83,6 +84,7 @@ public class PolicyHolderController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Account loggedInAccount = SharedVariable.loggedInAccount;
 
+
         if (loggedInAccount != null && loggedInAccount.getAccType().equals("POLICYHOLDER")) {
             try {
                 // 1. Fetch Policyholder data using the account ID
@@ -95,6 +97,10 @@ public class PolicyHolderController implements Initializable {
                 usernameFld.setText(loggedInPolicyHolder.getUsername());
                 insuranceFee.setText(valueOf(loggedInPolicyHolder.getInsuranceFee()) + "$");
                 displayName.setText(loggedInPolicyHolder.getFullName().split(" ")[0]);
+                int dependentCnt = AdvancedFunction.countDependents(loggedInPolicyHolder.getId());
+                totalMember.setText(valueOf(dependentCnt));
+                int totalFeeTemp = loggedInPolicyHolder.getInsuranceFee() + (loggedInPolicyHolder.getInsuranceFee()*60/100*dependentCnt);
+                totalFee.setText(valueOf(totalFeeTemp));
             } catch (Exception e) {
                 // Handle potential exceptions during data fetching
                 System.err.println("Error fetching policyholder data: " + e.getMessage());
@@ -267,8 +273,16 @@ public class PolicyHolderController implements Initializable {
     private void removeBlurEffect(Stage stage) {
         stage.getScene().getRoot().setEffect(null);
     }
+    @FXML
+    private void logOut(MouseEvent event) {
+        SharedVariable.resetValue();
+        try {
+            SceneController.switchScene(event, "/Fxml/Login.fxml");
+        } catch (IOException e) {
+            System.err.println("Error switching scene: " + e.getMessage());
 
-
+        }
+    }
 }
 
 

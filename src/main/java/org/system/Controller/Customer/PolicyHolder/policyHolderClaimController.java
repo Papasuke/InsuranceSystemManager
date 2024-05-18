@@ -18,10 +18,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
+import org.system.Controller.SharedVariable;
 import org.system.Model.Claim;
 import org.system.DataConnection.SupabaseJDBC;
 import org.system.utils.SceneController;
@@ -36,6 +38,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static org.system.Controller.SharedVariable.loggedInPolicyHolder;
 import static org.system.utils.UIEffects.applyBlurEffect;
 import static org.system.utils.UIEffects.removeBlurEffect;
 
@@ -91,6 +94,8 @@ public class policyHolderClaimController implements Initializable {
     private AnchorPane memberMenu;
     @FXML
     private AnchorPane claimMenu;
+    @FXML
+    private Text displayName;
 
     String query = null;
     Connection connection = null;
@@ -103,6 +108,7 @@ public class policyHolderClaimController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        displayName.setText(loggedInPolicyHolder.getFullName().split(" ")[0]);
         loadData();
         setupSearchFilter();
         setupStatusFilter();
@@ -321,6 +327,16 @@ public class policyHolderClaimController implements Initializable {
             SceneController.switchSceneCustomer(event, "PolicyHolderMembers");
         } catch (IOException e) {
             System.err.println("Error switching scene: " + e.getMessage());
+        }
+    }
+    @FXML
+    private void logOut(MouseEvent event) {
+        SharedVariable.resetValue();
+        try {
+            SceneController.switchScene(event, "/Fxml/Login.fxml");
+        } catch (IOException e) {
+            System.err.println("Error switching scene: " + e.getMessage());
+
         }
     }
 

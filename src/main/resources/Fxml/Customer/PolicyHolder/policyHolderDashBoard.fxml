@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import java.lang.String?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" stylesheets="@../../../Styles/policyHolderDashBoard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.system.Controller.Customer.PolicyHolder.PolicyHolderController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" stylesheets="@../../../Styles/policyHolderDashBoard.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.system.Controller.Customer.PolicyHolder.PolicyHolderController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -68,8 +63,8 @@
                         </AnchorPane>
                         <AnchorPane layoutY="626.0" prefHeight="50.0" prefWidth="250.0" styleClass="logout_box" stylesheets="@../../../Styles/policyHolderDashBoard.css" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="0.0">
                            <children>
-                              <Button layoutX="8.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="58.0" styleClass="logout_button" stylesheets="@../../../Styles/policyHolderDashBoard.css" textFill="#eeeeee" />
-                              <FontAwesomeIconView fx:id="logoutButton" fill="WHITE" glyphName="SIGN_OUT" layoutX="23.0" layoutY="35.0" size="30" />
+                              <Button fx:id="logoutButton" layoutX="8.0" mnemonicParsing="false" onMouseClicked="#logOut" prefHeight="48.0" prefWidth="58.0" styleClass="logout_button" stylesheets="@../../../Styles/policyHolderDashBoard.css" textFill="#eeeeee" />
+                              <FontAwesomeIconView fill="WHITE" glyphName="SIGN_OUT" layoutX="23.0" layoutY="35.0" size="30" />
                               <Label layoutX="77.0" layoutY="15.0" text="Logout" textFill="WHITE">
                                  <font>
                                     <Font name="Arial Bold Italic" size="17.0" />
