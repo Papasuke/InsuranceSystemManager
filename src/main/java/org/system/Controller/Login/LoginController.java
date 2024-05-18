@@ -13,7 +13,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.system.Model.Account;
-import org.system.utils.SceneController;
 
 import java.io.IOException;
 
@@ -67,7 +66,7 @@ public class LoginController {
         if (account != null) {
             loggedInAccount = account;
             if(role == "POLICYHOLDER"){
-                getStage("/Fxml/Customer/policyHolderDashBoard.fxml");
+                getStage("/Fxml/Customer/PolicyHolder/policyHolderDashBoard.fxml");
             }
         } else {
             // Invalid credentials

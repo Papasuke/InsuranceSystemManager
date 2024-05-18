@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="344.0" prefWidth="391.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.system.Controller.Customer.changePwdController">
+<AnchorPane prefHeight="344.0" prefWidth="391.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.system.Controller.Customer.PolicyHolder.changePwdController">
    <children>
       <PasswordField fx:id="currentPwd" layoutX="21.0" layoutY="96.0" prefHeight="33.0" prefWidth="346.0" />
       <Text layoutX="21.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Password">

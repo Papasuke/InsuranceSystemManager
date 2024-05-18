@@ -1,7 +1,6 @@
-package org.system.Controller.Customer;
+package org.system.Controller.Customer.PolicyHolder;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -160,7 +159,7 @@ public class PolicyHolderController implements Initializable {
     private void getEditView(MouseEvent event) {
         try {
             // Load the FXML for the edit view
-            Parent editView = FXMLLoader.load(getClass().getResource("/Fxml/Customer/editHolderInfo.fxml"));
+            Parent editView = FXMLLoader.load(getClass().getResource("/Fxml/Customer/PolicyHolder/editHolderInfo.fxml"));
 
             // Create a new scene for the edit view
             Scene editScene = new Scene(editView);
@@ -196,7 +195,7 @@ public class PolicyHolderController implements Initializable {
     private void getPwdView(MouseEvent event) {
         try {
             // Load the FXML for the edit view
-            Parent editView = FXMLLoader.load(getClass().getResource("/Fxml/Customer/changePwd.fxml"));
+            Parent editView = FXMLLoader.load(getClass().getResource("/Fxml/Customer/PolicyHolder/changePwd.fxml"));
 
             // Create a new scene for the edit view
             Scene editScene = new Scene(editView);
@@ -206,7 +205,7 @@ public class PolicyHolderController implements Initializable {
             editStage.setScene(editScene);
 
             // Customize the edit window (optional)
-            editStage.initStyle(StageStyle.DECORATED);
+            editStage.initStyle(StageStyle.UTILITY);
             editStage.initModality(Modality.APPLICATION_MODAL); // Prevent interaction with main window
 
             // Get the primary stage (for blur effect if needed)

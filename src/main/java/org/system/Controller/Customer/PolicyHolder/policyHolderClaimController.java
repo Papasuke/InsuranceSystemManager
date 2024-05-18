@@ -1,4 +1,4 @@
-package org.system.Controller.Customer;
+package org.system.Controller.Customer.PolicyHolder;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -22,7 +22,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import org.system.Controller.SharedVariable;
 import org.system.Model.Claim;
 import org.system.DataConnection.SupabaseJDBC;
 import org.system.utils.SceneController;
@@ -154,7 +153,7 @@ public class policyHolderClaimController implements Initializable {
                     editIcon.setOnMouseClicked((MouseEvent event) -> {
                         claim = claimTable.getSelectionModel().getSelectedItem();
                         FXMLLoader loader = new FXMLLoader();
-                        loader.setLocation(getClass().getResource("/Fxml/Customer/addClaim.fxml"));
+                        loader.setLocation(getClass().getResource("/Fxml/Customer/PolicyHolder/addClaim.fxml"));
                         try {
                             loader.load();
                         } catch (IOException ex) {
@@ -278,7 +277,7 @@ public class policyHolderClaimController implements Initializable {
     private void getAddView(MouseEvent event) {
         try {
             // Load the FXML for the edit view
-            Parent addView = FXMLLoader.load(getClass().getResource("/Fxml/Customer/addClaim.fxml"));
+            Parent addView = FXMLLoader.load(getClass().getResource("/Fxml/Customer/PolicyHolder/addClaim.fxml"));
 
             // Create a new scene for the edit view
             Scene editScene = new Scene(addView);
