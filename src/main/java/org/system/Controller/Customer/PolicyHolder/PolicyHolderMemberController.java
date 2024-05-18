@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -214,46 +215,46 @@ public class PolicyHolderMemberController implements Initializable {
                     deleteIcon.setStyle("-fx-cursor: hand; -glyph-size:20px; -fx-fill:#ff1744;");
                     editIcon.setStyle("-fx-cursor: hand; -glyph-size:20px; -fx-fill:#00E676;");
 
-//                    deleteIcon.setOnMouseClicked((MouseEvent event) -> {
-//                        Dependent dependent = getTableView().getItems().get(getIndex());
-//                        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to delete Member ID: " + dependent.getId() + " ?", ButtonType.YES, ButtonType.NO);
-//                        confirmAlert.showAndWait();
-//                        if (confirmAlert.getResult() == ButtonType.YES) {
-//                            String query = "DELETE FROM Dependent WHERE id = ?";
-//                            try (Connection conn = SupabaseJDBC.mintDatabase();
-//                                 PreparedStatement pstmt = conn.prepareStatement(query)) {
-//
-//                                pstmt.setInt(1, dependent.getId());
-//                                pstmt.executeUpdate();
-//
-//                                // Reload dependents and refresh the table
-//                                loadDependents();
-//
-//                            } catch (SQLException e) {
-//                                Logger.getLogger(PolicyHolderMemberController.class.getName()).log(Level.SEVERE, null, e);
-//                            }
-//                        }
-//                    });
-//
-//                    editIcon.setOnMouseClicked((MouseEvent event) -> {
-//                        Dependent dependent = getTableView().getItems().get(getIndex());
-//                        FXMLLoader loader = new FXMLLoader();
-//                        loader.setLocation(getClass().getResource("/Fxml/Customer/PolicyHolder/editMember.fxml"));
-//                        try {
-//                            loader.load();
-//                        } catch (IOException ex) {
-//                            Logger.getLogger(PolicyHolderMemberController.class.getName()).log(Level.SEVERE, null, ex);
-//                        }
-//
-//                        EditMemberController editMemberController = loader.getController();
-//                        editMemberController.setDependent(dependent);
-//                        Parent parent = loader.getRoot();
-//                        Stage stage = new Stage();
-//                        stage.setScene(new Scene(parent));
-//                        stage.initStyle(StageStyle.UTILITY);
-//                        stage.show();
-//                        loadDependents();
-//                    });
+                    deleteIcon.setOnMouseClicked((MouseEvent event) -> {
+                        Dependent dependent = getTableView().getItems().get(getIndex());
+                        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to delete Member ID: " + dependent.getId() + " ?", ButtonType.YES, ButtonType.NO);
+                        confirmAlert.showAndWait();
+                        if (confirmAlert.getResult() == ButtonType.YES) {
+                            String query = "DELETE FROM Dependent WHERE dependent_id = ?";
+                            try (Connection conn = SupabaseJDBC.mintDatabase();
+                                 PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+                                pstmt.setString(1, dependent.getId());
+                                pstmt.executeUpdate();
+
+                                // Reload dependents and refresh the table
+                                loadDependents();
+
+                            } catch (SQLException e) {
+                                Logger.getLogger(PolicyHolderMemberController.class.getName()).log(Level.SEVERE, null, e);
+                            }
+                        }
+                    });
+
+                    editIcon.setOnMouseClicked((MouseEvent event) -> {
+                        Dependent dependent = getTableView().getItems().get(getIndex());
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("/Fxml/Customer/PolicyHolder/editMember.fxml"));
+                        try {
+                            loader.load();
+                        } catch (IOException ex) {
+                            Logger.getLogger(PolicyHolderMemberController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                        EditMemberController editMember = loader.getController();
+                        Parent parent = loader.getRoot();
+                        editMember.setTextField(dependent.getId(),dependent.getUsername(),dependent.getFullName(),dependent.getEmail(),dependent.getPhone(),dependent.getInsuranceFee(),dependent.getPassword());
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(parent));
+                        stage.initStyle(StageStyle.UTILITY);
+                        stage.show();
+                        loadDependents();
+                    });
 
                     HBox managebtn = new HBox(editIcon, deleteIcon);
                     managebtn.setStyle("-fx-alignment:center");
@@ -312,4 +313,5 @@ public class PolicyHolderMemberController implements Initializable {
             Logger.getLogger(PolicyHolderMemberController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+
 }

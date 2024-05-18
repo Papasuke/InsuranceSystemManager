@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.system.Controller.SharedVariable;
 import org.system.DataConnection.SupabaseJDBC;
+import org.system.utils.AdvancedFunction;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -114,23 +115,19 @@ public class addMember implements Initializable {
         }
 
         // Database connection parameters
-        String url = "jdbc:postgresql://localhost:5432/your_database";
-        String user = "your_username";
-        String dbPassword = "your_password";
-
         try (Connection conn = SupabaseJDBC.mintDatabase()) {
             // Check for unique username
-            if (!isUnique(conn, "username", usernameFld.getText())) {
+            if (!AdvancedFunction.isUniqueCustomer(conn, "username", usernameFld.getText())) {
                 errors.add("Username already exists.");
             }
 
             // Check for unique email
-            if (!isUnique(conn, "email", emailFld.getText())) {
+            if (!AdvancedFunction.isUniqueCustomer(conn, "email", emailFld.getText())) {
                 errors.add("Email already exists.");
             }
 
             // Check for unique phone
-            if (!isUnique(conn, "phone", phoneFld.getText())) {
+            if (!AdvancedFunction.isUniqueCustomer(conn, "phone", phoneFld.getText())) {
                 errors.add("Phone number already exists.");
             }
 
@@ -166,25 +163,6 @@ public class addMember implements Initializable {
 
         } catch (SQLException e) {
             errorText.setText("Error saving data: " + e.getMessage());
-        }
-    }
-
-    private boolean isUnique(Connection conn, String column, String value) throws SQLException {
-        String query = "SELECT COUNT(*) FROM Dependent WHERE " + column + " = ? UNION ALL SELECT COUNT(*) FROM PolicyHolder WHERE " + column + " = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, value);
-            pstmt.setString(2, value);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                int dependentCount = 0;
-                int policyHolderCount = 0;
-                if (rs.next()) {
-                    dependentCount = rs.getInt(1);
-                }
-                if (rs.next()) {
-                    policyHolderCount = rs.getInt(1);
-                }
-                return dependentCount == 0 && policyHolderCount == 0;
-            }
         }
     }
 

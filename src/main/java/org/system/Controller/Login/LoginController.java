@@ -65,9 +65,23 @@ public class LoginController {
 
         if (account != null) {
             loggedInAccount = account;
+//            Policy Holder
             if(role == "POLICYHOLDER"){
                 getStage("/Fxml/Customer/PolicyHolder/policyHolderDashBoard.fxml");
             }
+            else if (role == "DEPENDENT"){
+                getStage("url Link");
+            }
+            else if (role == "SURVEYOR"){
+                getStage("url Link");
+            }
+            else if (role == "MANAGER"){
+                getStage("url Link");
+            }
+            else {
+                getStage("url Link");
+            }
+//
         } else {
             // Invalid credentials
             Alert alert = new Alert(Alert.AlertType.ERROR);

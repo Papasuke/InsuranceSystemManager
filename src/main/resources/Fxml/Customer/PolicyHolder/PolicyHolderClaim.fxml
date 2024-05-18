@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -93,9 +92,9 @@
                                         <Font name="Arial Bold" size="34.0" />
                                     </font>
                                 </Label>
-                                <AnchorPane layoutX="17.0" layoutY="120.0" prefHeight="554.0" prefWidth="917.0" style="-fx-background-color: white; -fx-background-radius: 20px;" styleClass="shadow" stylesheets="@../../../Styles/policyHolderDashBoard.css" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="120.0">
+                                <AnchorPane layoutX="17.0" layoutY="120.0" prefHeight="554.0" prefWidth="917.0" style="-fx-background-color: white; -fx-background-radius: 20px;" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="120.0">
                            <children>
-                              <TableView fx:id="claimTable" layoutX="22.0" layoutY="0.8" prefHeight="558.0" prefWidth="908.0" stylesheets="@../../../Styles/policyHolderDashBoard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="-5.0">
+                              <TableView fx:id="claimTable" layoutX="22.0" layoutY="0.8" prefHeight="559.0" prefWidth="921.0" styleClass="shadow" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="-5.0">
                                 <columns>
                                   <TableColumn fx:id="idCol" prefWidth="123.0" text="Claim ID" />
                                   <TableColumn fx:id="customerCol" prefWidth="194.0" text="Insured Person" />
@@ -103,13 +102,9 @@
                                     <TableColumn fx:id="exanCol" prefWidth="139.0" text="Exam Date" />
                                     <TableColumn fx:id="claimCol" prefWidth="125.0" text="Claim Amout" />
                                     <TableColumn fx:id="statusCol" prefWidth="99.0" text="Status" />
-                                    <TableColumn fx:id="editCol" prefWidth="89.0" text="Edit" />
+                                    <TableColumn fx:id="editCol" prefWidth="106.0" text="Edit" />
                                 </columns>
                               </TableView>
-                              <ScrollBar fx:id="scrollBar" layoutX="904.0" layoutY="-4.0" orientation="VERTICAL" prefHeight="558.0" prefWidth="19.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-4.0">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor></ScrollBar>
                            </children>
                                 </AnchorPane>
                                 <Line endX="799.0" layoutX="125.0" layoutY="53.0" startX="-110.0" AnchorPane.leftAnchor="13.600000000000023" AnchorPane.rightAnchor="25.5" />
