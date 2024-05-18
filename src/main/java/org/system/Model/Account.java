@@ -72,32 +72,4 @@ public class Account {
         return STR."Account{id='\{id}\{'\''}, username='\{username}\{'\''}, password='\{password}\{'\''}, email='\{email}\{'\''}, phone='\{phone}\{'\''}, accType='\{accType}\{'\''}\{'}'}";
     }
 
-    //    public AccountType getAccType() {
-//        return accType;
-//    }
-//
-//    public void setAccType(AccountType accType) {
-//        this.accType = accType;
-//    }
-//
-//    public void setPolicyHolder() {
-//        this.accType = AccountType.POLICYHOLDER;
-//    }
-//
-//    public void setDependent() {
-//        this.accType = AccountType.DEPENDENT;
-//    }
-//
-//    public void setSurveyor() {
-//        this.accType = AccountType.SURVEYOR;
-//    }
-//
-//    public void setManger() {
-//        this.accType = AccountType.MANAGER;
-//    }
-//
-//    public void setAdmin() {
-//        this.accType = AccountType.ADMIN;
-//    }
-
 }

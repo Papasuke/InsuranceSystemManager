@@ -169,7 +169,7 @@ public class PolicyHolderController implements Initializable {
             editStage.setScene(editScene);
 
             // Customize the edit window (optional)
-            editStage.initStyle(StageStyle.DECORATED);
+            editStage.initStyle(StageStyle.UTILITY);
             editStage.initModality(Modality.APPLICATION_MODAL); // Prevent interaction with main window
 
             // Get the primary stage (for blur effect if needed)
