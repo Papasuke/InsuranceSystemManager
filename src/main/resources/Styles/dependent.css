@@ -1,0 +1,15 @@
+.logoutButton {
+    -fx-background-color:  #F1F1F6;
+}
+.logoutButton:hover {
+    -fx-background-color: #F38181;
+    -fx-cursor: hand;
+}
+.optionBox:hover {
+    -fx-cursor: hand;
+    -fx-background-color: #88304E;
+}
+.close_button:hover {
+    -fx-fill:red;
+    -fx-cursor: hand;
+}

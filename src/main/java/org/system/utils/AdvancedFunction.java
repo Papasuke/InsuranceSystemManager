@@ -1,6 +1,8 @@
 package org.system.utils;
 
 import org.system.DataConnection.SupabaseJDBC;
+import org.system.Model.Dependent;
+import org.system.Model.PolicyHolder;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -47,5 +49,64 @@ public class AdvancedFunction {
             System.err.println("Error counting dependents: " + e.getMessage());
         }
         return 0;
+    }
+    public static PolicyHolder getPolicyholderFromDatabase(String accountId) {
+        try (Connection connection = SupabaseJDBC.mintDatabase()) {
+            String sql = "SELECT * FROM PolicyHolder WHERE policyholder_id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, accountId);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        // Process the result set and create a Policyholder object
+                        String policyholderId = resultSet.getString("policyholder_id");
+                        String username = resultSet.getString("username");
+                        String password = resultSet.getString("password");
+                        String email = resultSet.getString("email");
+                        String phone = resultSet.getString("phone");
+                        String fullName = resultSet.getString("fullname");
+                        int insuranceFee = resultSet.getInt("insuranceFee");
+                        // ... fetch claimId and dependentId (you'll need to handle the array data type)
+                        return new PolicyHolder(policyholderId, username, password, email, phone, "POLICYHOLDER", fullName, insuranceFee /*, claimId, dependentId */);
+                    } else {
+                        // Handle case where no Policyholder is found for the given accountId
+                        return null;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            // Handle SQL exceptions
+            System.err.println("Error fetching policyholder from database: " + e.getMessage());
+        }
+        return null;
+    }
+    public static Dependent getDependentFromDatabase(String accountId) {
+        try (Connection connection = SupabaseJDBC.mintDatabase()) {
+            String sql = "SELECT * FROM dependent WHERE dependent_id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, accountId);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        // Process the result set and create a Policyholder object
+                        String dependentId = resultSet.getString("dependent_id");
+                        String username = resultSet.getString("username");
+                        String password = resultSet.getString("password");
+                        String email = resultSet.getString("email");
+                        String phone = resultSet.getString("phone");
+                        String fullName = resultSet.getString("fullname");
+                        String accType = resultSet.getString("acctype");
+                        String holderId = resultSet.getString("policyholder_id");
+                        int insuranceFee = resultSet.getInt("insuranceFee");
+                        return new Dependent(dependentId, username, password, email, phone, accType, holderId,fullName, insuranceFee);
+                    } else {
+                        // Handle case where no Policyholder is found for the given accountId
+                        return null;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            // Handle SQL exceptions
+            System.err.println("Error fetching policyholder from database: " + e.getMessage());
+        }
+        return null;
     }
 }

@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.system.Controller.SharedVariable;
 import org.system.Model.Account;
 
 import java.io.IOException;
@@ -64,13 +65,15 @@ public class LoginController {
         Account account = new AccountDAOImpl().login(username, password, role);
 
         if (account != null) {
-            loggedInAccount = account;
+            SharedVariable.loggedInAccount = account;
 //            Policy Holder
             if(role == "POLICYHOLDER"){
                 getStage("/Fxml/Customer/PolicyHolder/policyHolderDashBoard.fxml");
             }
             else if (role == "DEPENDENT"){
-                getStage("url Link");
+                getStage("/Fxml/Customer/Dependent/dependentDashBoard.fxml");
+//                getStage("/Fxml/Customer/Dependent/hello.fxml");
+//                C:\Users\Admin\Desktop\InsuranceSystemManager\src\main\resources\Fxml\Customer\Dependent\dependentDashBoard.fxml
             }
             else if (role == "SURVEYOR"){
                 getStage("url Link");
@@ -120,7 +123,7 @@ public class LoginController {
             // Create the new stage and set the scene
             Stage newStage = new Stage();
             newStage.setScene(newScene);
-            newStage.initModality(Modality.APPLICATION_MODAL); // Optional: Make the new stage modal if needed
+//            newStage.initModality(Modality.APPLICATION_MODAL); // Optional: Make the new stage modal if needed
             newStage.initStyle(StageStyle.UNDECORATED); // Optional: Set new stage style if needed
             newStage.show();
 

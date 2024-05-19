@@ -63,17 +63,9 @@ public class AccountDAOImpl {
             case "POLICYHOLDER":
                 // Assuming PolicyHolder has additional fields like policyHolderId
                 return new Account(resultSet.getString("policyholder_id"),resultSet.getString("username"), resultSet.getString("password"),resultSet.getString("email"),resultSet.getString("phone"), resultSet.getString("acctype"));
-//            case "DEPENDENT":
-//                // Assuming Dependent has additional fields like policyHolderId
-//                return new Account(
-//                        resultSet.getString("username"),
-//                        resultSet.getString("password"),
-//                        resultSet.getString("email"),
-//                        resultSet.getString("phone"),
-//                        accountType,
-//                        resultSet.getString("policyholder_id") // Assuming column name is policyholder_id
-//                );
-//            // Add cases for other account types
+            case "DEPENDENT":
+                return new Account(resultSet.getString("dependent_id"),resultSet.getString("username"), resultSet.getString("password"),resultSet.getString("email"),resultSet.getString("phone"), resultSet.getString("acctype"));
+            // Add cases for other account types
             default:
                 return null;
         }
