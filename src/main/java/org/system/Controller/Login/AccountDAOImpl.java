@@ -16,6 +16,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static org.system.Controller.SharedVariable.loggedInAccount;
+
 public class AccountDAOImpl {
     public Account login(String username, String password, String accountType) {
         String tableName = accountType;
@@ -31,6 +33,7 @@ public class AccountDAOImpl {
             if (resultSet.next()) {
                 // Create Account object based on the retrieved data
                 return createAccountFromResultSet(resultSet, accountType);
+
             }
 
         } catch (SQLException e) {
@@ -59,18 +62,10 @@ public class AccountDAOImpl {
         switch (accountType) {
             case "POLICYHOLDER":
                 // Assuming PolicyHolder has additional fields like policyHolderId
-                return new Account(resultSet.getString("policyholder_id"),resultSet.getString("username"), resultSet.getString("password"),resultSet.getString("email"),resultSet.getString("phone"), resultSet.getString("accounttype"));
-//            case "DEPENDENT":
-//                // Assuming Dependent has additional fields like policyHolderId
-//                return new Account(
-//                        resultSet.getString("username"),
-//                        resultSet.getString("password"),
-//                        resultSet.getString("email"),
-//                        resultSet.getString("phone"),
-//                        accountType,
-//                        resultSet.getString("policyholder_id") // Assuming column name is policyholder_id
-//                );
-//            // Add cases for other account types
+                return new Account(resultSet.getString("policyholder_id"),resultSet.getString("username"), resultSet.getString("password"),resultSet.getString("email"),resultSet.getString("phone"), resultSet.getString("acctype"));
+            case "DEPENDENT":
+                return new Account(resultSet.getString("dependent_id"),resultSet.getString("username"), resultSet.getString("password"),resultSet.getString("email"),resultSet.getString("phone"), resultSet.getString("acctype"));
+            // Add cases for other account types
             default:
                 return null;
         }

@@ -3,6 +3,8 @@ package org.system.Model;
 import java.util.ArrayList;
 
 public class PolicyHolder extends Account{
+    private String fullName;
+    private int insuranceFee;
     private ArrayList<String> claimId;
     private ArrayList<String> dependentId;
     public PolicyHolder() {
@@ -11,10 +13,26 @@ public class PolicyHolder extends Account{
         this.dependentId = new ArrayList<>();
     }
 
-    public PolicyHolder(String id, String username, String password, String email, String phone, String accType, ArrayList<String> claimIdList, ArrayList<String> dependentIdList) {
-        super(id, username, password, email, phone, "POLICYHOLDER");
-        this.claimId = claimIdList;
-        this.dependentId = dependentIdList;
+    public PolicyHolder(String id, String username, String password, String email, String phone, String accType, String fullName, int insuranceFee) {
+        super(id, username, password, email, phone, accType);
+        this.fullName = fullName;
+        this.insuranceFee = insuranceFee;
+    }
+
+    public PolicyHolder(String id, String username, String password, String email, String phone, String accType, String fullName, int insuranceFee, ArrayList<String> claimId, ArrayList<String> dependentId) {
+        super(id, username, password, email, phone, accType);
+        this.fullName = fullName;
+        this.insuranceFee = insuranceFee;
+        this.claimId = claimId;
+        this.dependentId = dependentId;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public ArrayList<String> getClaimId() {
@@ -39,5 +57,14 @@ public class PolicyHolder extends Account{
     public void addDependentId(String dependentId) {
         this.dependentId.add(dependentId);
     }
+
+    public int getInsuranceFee() {
+        return insuranceFee;
+    }
+
+    public void setInsuranceFee(int insuranceFee) {
+        this.insuranceFee = insuranceFee;
+    }
+
 
 }

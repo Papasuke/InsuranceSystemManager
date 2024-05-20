@@ -37,7 +37,7 @@
                   <Font name="Century Gothic Bold" size="15.0" />
                </font>
             </Text>
-            <Button fx:id="loginButton" layoutX="25.0" layoutY="352.0" mnemonicParsing="false" onAction="#handleLoginButtonClick" prefHeight="36.0" prefWidth="300.0" styleClass="loginButton" text="Log in" textFill="WHITE">
+            <Button fx:id="loginButton" layoutX="25.0" layoutY="352.0" mnemonicParsing="false" onMouseClicked="#handleLoginButtonClick" prefHeight="36.0" prefWidth="300.0" styleClass="loginButton" text="Log in" textFill="WHITE">
                <font>
                   <Font name="Bell MT Bold" size="18.0" />
                </font>

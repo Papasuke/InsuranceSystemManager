@@ -1,4 +1,4 @@
-package org.system.Controller.Customer;
+package org.system.Controller.Customer.PolicyHolder;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,7 +15,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.system.Controller.SharedVariable;
 import org.system.DataConnection.SupabaseJDBC;
 import org.system.Model.Claim;
 
@@ -80,7 +79,6 @@ public class addClaimCustomer implements Initializable {
     private boolean update;
     @FXML
     private void close(MouseEvent event) {
-        SharedVariable.openOnce = false;
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
@@ -118,11 +116,10 @@ public class addClaimCustomer implements Initializable {
                 clean();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 System.out.println("New Claim Added");
-                alert.setContentText("New Claim Added");
-                SharedVariable.openOnce = false;
-                alert.showAndWait();
                 Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
                 stage.close();
+                alert.setContentText("New Claim Added");
+                alert.showAndWait();
             }
         }
     }

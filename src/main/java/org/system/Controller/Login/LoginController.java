@@ -3,13 +3,21 @@ package org.system.Controller.Login;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 //import org.system.DAO.Impl.AccountDAOImpl;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import org.system.Controller.SharedVariable;
 import org.system.Model.Account;
-import org.system.utils.SceneController;
 
 import java.io.IOException;
+
+import static org.system.Controller.SharedVariable.loggedInAccount;
 
 public class LoginController {
 
@@ -31,7 +39,7 @@ public class LoginController {
 //    private AccountDAOImpl accountDAO = new AccountDAOImpl();
 //
     public void initialize() {
-        selectRole.getItems().addAll("POLICYHOLDER", "DEPENDENT");
+        selectRole.getItems().addAll("POLICYHOLDER", "DEPENDENT","SURVEYOR","MANAGER","ADMIN");
     }
 
     @FXML
@@ -40,7 +48,7 @@ public class LoginController {
     }
 
     @FXML
-    void handleLoginButtonClick(ActionEvent event) {
+    void handleLoginButtonClick(MouseEvent event) {
         String username = username_input.getText();
         String password = showPwdCheckBox.isSelected() ? password_text.getText() : password_input.getText();
         String role = selectRole.getValue();
@@ -57,16 +65,26 @@ public class LoginController {
         Account account = new AccountDAOImpl().login(username, password, role);
 
         if (account != null) {
+            SharedVariable.loggedInAccount = account;
+//            Policy Holder
             if(role == "POLICYHOLDER"){
-                try {
-                    SceneController.switchSceneCustomer(event, "policyHolderDashBoard");
-                    System.out.println("login success");
-                } catch (IOException e) {
-                    // Handle the IOException here, e.g.,
-                    System.err.println("Error switching scene: " + e.getMessage());
-                    // You could also display an error alert to the user
-                }
+                getStage("/Fxml/Customer/PolicyHolder/policyHolderDashBoard.fxml");
             }
+            else if (role == "DEPENDENT"){
+                getStage("/Fxml/Customer/Dependent/dependentDashBoard.fxml");
+//                getStage("/Fxml/Customer/Dependent/hello.fxml");
+//                C:\Users\Admin\Desktop\InsuranceSystemManager\src\main\resources\Fxml\Customer\Dependent\dependentDashBoard.fxml
+            }
+            else if (role == "SURVEYOR"){
+                getStage("url Link");
+            }
+            else if (role == "MANAGER"){
+                getStage("url Link");
+            }
+            else {
+                getStage("url Link");
+            }
+//
         } else {
             // Invalid credentials
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -90,6 +108,34 @@ public class LoginController {
             password_input.setText(password_text.getText());
             password_text.setVisible(false);
             password_input.setVisible(true);
+        }
+    }
+
+    public void getStage(String fxmlUrl) {
+        try {
+
+            Parent parent = FXMLLoader.load(getClass().getResource(fxmlUrl));
+            Scene newScene = new Scene(parent);
+
+            // Get the current stage using the mainMenu AnchorPane
+            Stage currentStage = (Stage) loginButton.getScene().getWindow();
+
+            // Create the new stage and set the scene
+            Stage newStage = new Stage();
+            newStage.setScene(newScene);
+//            newStage.initModality(Modality.APPLICATION_MODAL); // Optional: Make the new stage modal if needed
+            newStage.initStyle(StageStyle.UNDECORATED); // Optional: Set new stage style if needed
+            newStage.show();
+
+            // Close the current stage
+            currentStage.close();
+            System.out.println("login success");
+            System.out.println(loggedInAccount.toString());
+
+        } catch (IOException e) {
+            // Handle the IOException here, e.g.,
+            System.err.println("Error switching scene: " + e.getMessage());
+            // You could also display an error alert to the user
         }
     }
 }

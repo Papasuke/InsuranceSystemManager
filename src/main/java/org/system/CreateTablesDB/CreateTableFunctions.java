@@ -15,9 +15,11 @@ public class CreateTableFunctions {
                 "password TEXT NOT NULL, " +
                 "email TEXT UNIQUE NOT NULL, " +
                 "phone TEXT UNIQUE NOT NULL, " +
+                "fullname TEXT  NOT NULL, " +
+                "insuranceFee INT NOT NULL," +
                 "claimId TEXT[], " +
                 "dependentId TEXT[], " +
-                "accountType TEXT NOT NULL DEFAULT 'POLICYHOLDER'" + // Added accountType column
+                "accType TEXT NOT NULL DEFAULT 'POLICYHOLDER'" + // Added accountType column
                 ")";
 
 
@@ -49,10 +51,12 @@ public class CreateTableFunctions {
                 "password TEXT NOT NULL, " +
                 "email TEXT UNIQUE NOT NULL, " +
                 "phone TEXT UNIQUE NOT NULL, " +
-                "policyHolderId TEXT NOT NULL, " +
+                "policyHolder_id TEXT NOT NULL, " +
+                "fullname TEXT  NOT NULL, " +
+                "insuranceFee INT NOT NULL," +
                 "claimId TEXT[], " +
-                "accountType TEXT NOT NULL DEFAULT 'DEPENDENT', " +
-                "CONSTRAINT fk_policyholder_id FOREIGN KEY (policyHolderId) REFERENCES PolicyHolder(policyholder_id)" +
+                "accType TEXT NOT NULL DEFAULT 'DEPENDENT', " +
+                "CONSTRAINT fk_policyholder_id FOREIGN KEY (policyHolder_id) REFERENCES PolicyHolder(policyholder_id)" +
                 ")";
 
         try (Statement statement = connection.createStatement()) {

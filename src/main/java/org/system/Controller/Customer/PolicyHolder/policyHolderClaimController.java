@@ -1,4 +1,4 @@
-package org.system.Controller.Customer;
+package org.system.Controller.Customer.PolicyHolder;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -17,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -24,6 +26,7 @@ import javafx.util.Callback;
 import org.system.Controller.SharedVariable;
 import org.system.Model.Claim;
 import org.system.DataConnection.SupabaseJDBC;
+import org.system.utils.SceneController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,6 +37,10 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static org.system.Controller.SharedVariable.loggedInPolicyHolder;
+import static org.system.utils.UIEffects.applyBlurEffect;
+import static org.system.utils.UIEffects.removeBlurEffect;
 
 public class policyHolderClaimController implements Initializable {
     @FXML
@@ -87,6 +94,8 @@ public class policyHolderClaimController implements Initializable {
     private AnchorPane memberMenu;
     @FXML
     private AnchorPane claimMenu;
+    @FXML
+    private Text displayName;
 
     String query = null;
     Connection connection = null;
@@ -99,6 +108,7 @@ public class policyHolderClaimController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        displayName.setText(loggedInPolicyHolder.getFullName().split(" ")[0]);
         loadData();
         setupSearchFilter();
         setupStatusFilter();
@@ -149,7 +159,7 @@ public class policyHolderClaimController implements Initializable {
                     editIcon.setOnMouseClicked((MouseEvent event) -> {
                         claim = claimTable.getSelectionModel().getSelectedItem();
                         FXMLLoader loader = new FXMLLoader();
-                        loader.setLocation(getClass().getResource("/Fxml/Customer/addClaim.fxml"));
+                        loader.setLocation(getClass().getResource("/Fxml/Customer/PolicyHolder/addClaim.fxml"));
                         try {
                             loader.load();
                         } catch (IOException ex) {
@@ -265,7 +275,6 @@ public class policyHolderClaimController implements Initializable {
 
     @FXML
     private void close(MouseEvent event) {
-        SharedVariable.openOnce = false;
         javafx.application.Platform.exit();
     }
 
@@ -273,16 +282,31 @@ public class policyHolderClaimController implements Initializable {
     @FXML
     private void getAddView(MouseEvent event) {
         try {
-            if(!SharedVariable.openOnce) {
-                Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/Customer/addClaim.fxml"));
-                Scene scene = new Scene(parent);
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.initStyle(StageStyle.UNDECORATED);
-                stage.initModality(Modality.APPLICATION_MODAL); // This line makes the new stage modal
-                stage.show();
-                SharedVariable.openOnce = true;
-            }
+            // Load the FXML for the edit view
+            Parent addView = FXMLLoader.load(getClass().getResource("/Fxml/Customer/PolicyHolder/addClaim.fxml"));
+
+            // Create a new scene for the edit view
+            Scene editScene = new Scene(addView);
+
+            // Create a new stage for the edit window
+            Stage editStage = new Stage();
+            editStage.setScene(editScene);
+
+            // Customize the edit window (optional)
+            editStage.initStyle(StageStyle.DECORATED);
+            editStage.initModality(Modality.APPLICATION_MODAL); // Prevent interaction with main window
+
+            // Get the primary stage (for blur effect if needed)
+            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Apply blur effect to the primary stage (if needed)
+            applyBlurEffect(primaryStage);
+
+            // Show the edit window
+            editStage.showAndWait(); // Wait for the edit window to close
+
+            // Remove blur effect after the edit window is closed (if needed)
+            removeBlurEffect(primaryStage);
 
         } catch (IOException ex) {
             Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
@@ -292,49 +316,27 @@ public class policyHolderClaimController implements Initializable {
     @FXML
     private void handleMainMenuClick(MouseEvent event) {
         try {
-            // Load the new FXML
-            Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/Customer/policyHolderDashBoard.fxml"));
-            Scene newScene = new Scene(parent);
-
-            // Get the current stage using the mainMenu AnchorPane
-            Stage currentStage = (Stage) mainMenu.getScene().getWindow();
-
-            // Create the new stage and set the scene
-            Stage newStage = new Stage();
-            newStage.setScene(newScene);
-            newStage.initModality(Modality.APPLICATION_MODAL); // Optional: Make the new stage modal if needed
-            newStage.initStyle(StageStyle.UNDECORATED); // Optional: Set new stage style if needed
-            newStage.show();
-
-            // Close the current stage
-            currentStage.close();
-
-        } catch (IOException ex) {
-            Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
+            SceneController.switchSceneCustomer(event, "policyHolderDashBoard");
+        } catch (IOException e) {
+            System.err.println("Error switching scene: " + e.getMessage());
         }
     }
     @FXML
     private void memberMenuClick(MouseEvent event) {
         try {
-            // Load the new FXML
-            Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/Customer/PolicyHolderMembers.fxml"));
-            Scene newScene = new Scene(parent);
+            SceneController.switchSceneCustomer(event, "PolicyHolderMembers");
+        } catch (IOException e) {
+            System.err.println("Error switching scene: " + e.getMessage());
+        }
+    }
+    @FXML
+    private void logOut(MouseEvent event) {
+        SharedVariable.resetValue();
+        try {
+            SceneController.switchScene(event, "/Fxml/Login.fxml");
+        } catch (IOException e) {
+            System.err.println("Error switching scene: " + e.getMessage());
 
-            // Get the current stage using the mainMenu AnchorPane
-            Stage currentStage = (Stage) memberMenu.getScene().getWindow();
-
-            // Create the new stage and set the scene
-            Stage newStage = new Stage();
-            newStage.setScene(newScene);
-            newStage.initModality(Modality.APPLICATION_MODAL); // Optional: Make the new stage modal if needed
-            newStage.initStyle(StageStyle.UNDECORATED); // Optional: Set new stage style if needed
-            newStage.show();
-
-            // Close the current stage
-            currentStage.close();
-
-        } catch (IOException ex) {
-            Logger.getLogger(policyHolderClaimController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

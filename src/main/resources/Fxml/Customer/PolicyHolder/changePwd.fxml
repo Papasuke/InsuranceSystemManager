@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="344.0" prefWidth="391.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.system.Controller.Customer.PolicyHolder.changePwdController">
+   <children>
+      <PasswordField fx:id="currentPwd" layoutX="21.0" layoutY="96.0" prefHeight="33.0" prefWidth="346.0" />
+      <Text layoutX="21.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Password">
+         <font>
+            <Font name="Arial" size="29.0" />
+         </font>
+      </Text>
+      <FontAwesomeIconView fx:id="closeButton" glyphName="CLOSE" layoutX="355.0" layoutY="41.0" onMouseClicked="#handleClose" size="30" text="">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </FontAwesomeIconView>
+      <PasswordField fx:id="newPwd" layoutX="21.0" layoutY="154.0" prefHeight="33.0" prefWidth="346.0" />
+      <PasswordField fx:id="confirmPwd" layoutX="21.0" layoutY="217.0" prefHeight="33.0" prefWidth="346.0" />
+      <Text layoutX="21.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Password:">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="21.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Password:">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="21.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm New Password:">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Text>
+      <Button fx:id="changePwd" layoutX="23.0" layoutY="291.0" mnemonicParsing="false" onMouseClicked="#handleChangePwd" prefHeight="39.0" prefWidth="346.0" style="-fx-background-radius: 100px; -fx-background-color: #007071;" text="Change Password" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>
