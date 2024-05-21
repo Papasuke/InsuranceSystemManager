@@ -6,11 +6,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.system.Application.testingApp;
-import org.system.DataConnection.SupabaseJDBC;
-
 import java.io.IOException;
 
-import static javafx.application.Application.launch;
+
 
 public class Main extends Application {
     public void start(Stage stage) throws IOException {
